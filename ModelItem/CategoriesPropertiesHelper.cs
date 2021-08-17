@@ -10,21 +10,22 @@ namespace NavisworksDevHelper.ModelItem
     public static class CategoriesPropertiesHelper
     {
         /// <summary>
-        /// Returns the Value based on its type.
+        ///  Returns the Value based on its type.
         /// </summary>
-        /// <param name="variantData">Value</param>
-        /// <returns>Cleaned Value</returns>
-        public static object GetCleanedVariantData(VariantData variantData)
+        /// <param name="variantData">VariantData (Value)</param>
+        /// <param name="toDisplayValueAsString">Is it for display as string?</param>
+        /// <returns>with displayAsString True: returns best string for displaying, false: returns object</returns>
+        public static object GetCleanedVariantData(VariantData variantData, bool toDisplayValueAsString = false)
         {
             switch (variantData.DataType)
             {
                 // Empty. No data stored.
                 case VariantDataType.None:
-                    return string.Empty;
+                    goto default;
 
                 // Unit-less double value
                 case VariantDataType.Double:
-                    return variantData.ToDouble();
+                    return toDisplayValueAsString ? Math.Round(variantData.ToDouble(),2) : variantData.ToDouble();
 
                 // Unit-less 32 bit integer value
                 case VariantDataType.Int32:
@@ -52,7 +53,14 @@ namespace NavisworksDevHelper.ModelItem
 
                 // A named constant
                 case VariantDataType.NamedConstant:
-                    return variantData.ToNamedConstant();
+                    if (toDisplayValueAsString)
+                    {
+                        return variantData.ToNamedConstant().DisplayName;
+                    }
+                    else
+                    {
+                        return variantData.ToNamedConstant();
+                    }
 
                 // String intended to be used as a programmatic identifier. 7-bit ASCII characters only.
                 case VariantDataType.IdentifierString:
