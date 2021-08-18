@@ -87,5 +87,42 @@ namespace NavisworksDevHelper.ModelItem
                     return variantData.ToString();
             }
         }
+
+        /// <summary>
+        /// Gets the icon type that it is on visual tree.
+        /// </summary>
+        /// <param name="modelItem"></param>
+        /// <returns></returns>
+        public static IconType GetIconType(Autodesk.Navisworks.Api.ModelItem modelItem)
+        {
+            var iconProperty = modelItem.PropertyCategories.FindPropertyByName("LcOaNode", "LcOaNodeIcon");
+
+            var iconValue = GetCleanedVariantData(iconProperty.Value, true) as string;
+
+            switch (iconValue)
+            {
+                case "File":
+                    return IconType.File;
+
+                case "Layer":
+                    return IconType.Layer;
+
+                case "Collection":
+                    return IconType.Collection;
+
+                case "Composite Object":
+                    return IconType.CompositeObject;
+
+                case "Insert Group":
+                    return IconType.InsertGroup;
+
+                case "Geometry":
+                    return IconType.Geometry;
+
+                default:
+                    return IconType.Unidentified;
+            }
+        }
+
     }
 }
