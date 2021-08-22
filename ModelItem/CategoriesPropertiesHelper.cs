@@ -199,6 +199,7 @@ namespace NavisworksDevHelper.ModelItem
             }
         }
 
+        #region Serialize ModelItem Properties to json
         public static StringBuilder SerializeModelItemsProperties(Autodesk.Navisworks.Api.ModelItemCollection modelItems)
         {
 
@@ -292,6 +293,8 @@ namespace NavisworksDevHelper.ModelItem
             public string Value { get; set; }
             public string VauleType { get; set; }
         }
+        #endregion
+
     }
 
 }
