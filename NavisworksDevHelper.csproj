@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ModelItem\CategoriesPropertiesHelper.cs" />
+    <Compile Include="ModelItem\CategoriesPropertiesHelper.ModelItemSerializable.cs" />
     <Compile Include="ModelItem\IconType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

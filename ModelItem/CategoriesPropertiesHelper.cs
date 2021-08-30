@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using Autodesk.Navisworks.Api;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -11,17 +12,17 @@ using Newtonsoft.Json.Converters;
 
 namespace NavisworksDevHelper.ModelItem
 {
-    public static class CategoriesPropertiesHelper
+    public static partial class CategoriesPropertiesHelper
     {
+        #region Methods
+
         /// <summary>
-        ///  Returns the Value based on its type.
+        ///  gets the Value based on its type.
         /// </summary>
         /// <param name="variantData">VariantData (Value)</param>
-        /// <param name="toDisplayValueAsString">Is it for display as string?</param>
-        /// <returns>with displayAsString True: returns best string for displaying, false: returns object</returns>
-        public static object GetCleanedVariantData(VariantData variantData, bool toDisplayValueAsString = false)
+        /// <returns>Object that can be casted to its class (i.e. NamedConstant, double etc...) available in Autodesk.Navisworks.Api.VariantDataType</returns>
+        public static object GetCleanedVariantData(VariantData variantData)
         {
-
             switch (variantData.DataType)
             {
                 // Empty. No data stored.
@@ -30,36 +31,15 @@ namespace NavisworksDevHelper.ModelItem
 
                 // Unit-less double value
                 case VariantDataType.Double:
-                    if (toDisplayValueAsString)
-                    {
-                        return variantData.ToDouble().ToString();
-                    }
-                    else
-                    {
                         return variantData.ToDouble();
-                    }
 
                 // Unit-less 32 bit integer value
                 case VariantDataType.Int32:
-                    if (toDisplayValueAsString)
-                    {
-                        return variantData.ToInt32().ToString();
-                    }
-                    else
-                    {
                         return variantData.ToInt32();
-                    }
 
                 // Boolean (true/false) value
                 case VariantDataType.Boolean:
-                    if (toDisplayValueAsString)
-                    {
-                        return variantData.ToBoolean().ToString();
-                    }
-                    else
-                    {
                         return variantData.ToBoolean();
-                    }
 
                 // String intended for display to the end user (normally localized)
                 case VariantDataType.DisplayString:
@@ -67,47 +47,19 @@ namespace NavisworksDevHelper.ModelItem
 
                 // A specific date and time (usually UTC)
                 case VariantDataType.DateTime:
-                    if (toDisplayValueAsString)
-                    {
-                        return variantData.ToDateTime().ToString();
-                    }
-                    else
-                    {
                         return variantData.ToDateTime();
-                    }
 
                 // A double that represents a length (specific units depend on context)
                 case VariantDataType.DoubleLength:
-                    if (toDisplayValueAsString)
-                    {
-                        return variantData.ToDoubleLength().ToString();
-                    }
-                    else
-                    {
                         return variantData.ToDoubleLength();
-                    }
 
                 // A double that represents an angle in radians
                 case VariantDataType.DoubleAngle:
-                    if (toDisplayValueAsString)
-                    {
-                        return variantData.ToDoubleAngle().ToString();
-                    }
-                    else
-                    {
                         return variantData.ToDoubleAngle();
-                    }
 
                 // A named constant
                 case VariantDataType.NamedConstant:
-                    if (toDisplayValueAsString)
-                    {
-                        return variantData.ToNamedConstant().DisplayName;
-                    }
-                    else
-                    {
                         return variantData.ToNamedConstant();
-                    }
 
                 // String intended to be used as a programmatic identifier. 7-bit ASCII characters only.
                 case VariantDataType.IdentifierString:
@@ -115,47 +67,90 @@ namespace NavisworksDevHelper.ModelItem
 
                 // A double that species an area (specific units depend on context)
                 case VariantDataType.DoubleArea:
-                    if (toDisplayValueAsString)
-                    {
-                        return variantData.ToDoubleArea().ToString();
-                    }
-                    else
-                    {
                         return variantData.ToDoubleArea();
-                    }
 
                 // A double that species a volume (specific units depend on context)
                 case VariantDataType.DoubleVolume:
-                    if (toDisplayValueAsString)
-                    {
-                        return variantData.ToDoubleVolume().ToString();
-                    }
-                    else
-                    {
                         return variantData.ToDoubleVolume();
-                    }
 
                 // A 3D point value
                 case VariantDataType.Point3D:
-                    if (toDisplayValueAsString)
-                    {
-                        return variantData.ToPoint3D().ToString();
-                    }
-                    else
-                    {
                         return variantData.ToPoint3D();
-                    }
 
                 // A 2D point value
                 case VariantDataType.Point2D:
-                    if (toDisplayValueAsString)
-                    {
-                        return variantData.ToPoint2D().ToString();
-                    }
-                    else
-                    {
                         return variantData.ToPoint2D();
-                    }
+
+                // the default
+                default:
+                    return variantData.ToString();
+            }
+        }
+
+        /// <summary>
+        /// Returns the suitable string for displaying data of the VariantData class
+        /// </summary>
+        /// <param name="variantData"></param>
+        /// <returns></returns>
+        public static string GetDisplayableVariantData(VariantData variantData)
+        {
+            switch (variantData.DataType)
+            {
+                // Empty. No data stored.
+                case VariantDataType.None:
+                    goto default;
+
+                // Unit-less double value
+                case VariantDataType.Double:
+                    goto default;
+
+                // Unit-less 32 bit integer value
+                case VariantDataType.Int32:
+                    goto default;
+
+                // Boolean (true/false) value
+                case VariantDataType.Boolean:
+                    goto default;
+
+                // String intended for display to the end user (normally localized)
+                case VariantDataType.DisplayString:
+                    return variantData.ToDisplayString();
+
+                // A specific date and time (usually UTC)
+                case VariantDataType.DateTime:
+                    goto default;
+
+                // A double that represents a length (specific units depend on context)
+                case VariantDataType.DoubleLength:
+                    goto default;
+
+                // A double that represents an angle in radians
+                case VariantDataType.DoubleAngle:
+                    goto default;
+
+                // A named constant
+                case VariantDataType.NamedConstant:
+                    return variantData.ToNamedConstant().DisplayName;
+
+                // String intended to be used as a programmatic identifier. 7-bit ASCII characters only.
+                case VariantDataType.IdentifierString:
+                    return variantData.ToIdentifierString();
+
+                // A double that species an area (specific units depend on context)
+                case VariantDataType.DoubleArea:
+                    goto default;
+
+                // A double that species a volume (specific units depend on context)
+                case VariantDataType.DoubleVolume:
+                    goto default;
+
+                // A 3D point value
+                case VariantDataType.Point3D:
+                    goto default;
+
+                // A 2D point value
+                case VariantDataType.Point2D:
+                    goto default;
 
                 // the default
                 default:
@@ -172,7 +167,7 @@ namespace NavisworksDevHelper.ModelItem
         {
             var iconProperty = modelItem.PropertyCategories.FindPropertyByName("LcOaNode", "LcOaNodeIcon");
 
-            var iconValue = GetCleanedVariantData(iconProperty.Value, true) as string;
+            var iconValue = GetDisplayableVariantData(iconProperty.Value);
 
             switch (iconValue)
             {
@@ -199,65 +194,40 @@ namespace NavisworksDevHelper.ModelItem
             }
         }
 
-        #region Serialize ModelItem Properties to json
-        public static StringBuilder SerializeModelItemsProperties(Autodesk.Navisworks.Api.ModelItemCollection modelItems)
+        /// <summary>
+        /// Serialize ModelItem Properties to JSON
+        /// </summary>
+        /// <param name="modelItems"></param>
+        /// <returns>JSON as StringBuilder</returns>
+        public static StringBuilder SerializeModelItems(Autodesk.Navisworks.Api.ModelItemCollection modelItems, bool sortAlphabetically = false, bool indentedFormat = false)
         {
 
-            #region setting the data in the serializable classes
-            var preparedModelItems = new List<ModelItemCategoriesSerialiableObject>();
+            // setting the data in the serializable classes
+            var preparedModelItems = new List<ModelItemSerializable>();
             foreach (var modelItem in modelItems)
             {
-                var categories = new List<Category>();
-                foreach (var category in modelItem.PropertyCategories)
-                {
-                    var thisCategory = new Category()
-                    {
-                        Name = category.Name,
-                        DisplayName = category.DisplayName,
-                        Properties = new List<Property>()
-                    };
-
-
-                    foreach (var property in category.Properties)
-                    {
-
-                        var thisProperty = new Property()
-                        {
-                            Name = property.Name,
-                            DisplayName = property.DisplayName,
-                            Value = GetCleanedVariantData(property.Value, true) as string,
-                            VauleType = property.Value.DataType.ToString()
-                        };
-
-                        thisCategory.Properties.Add(thisProperty);
-
-                    }
-
-                    categories.Add(thisCategory);
-
-                }
-
-                preparedModelItems.Add(new ModelItemCategoriesSerialiableObject()
-                {
-                    DisplayName = modelItem.DisplayName,
-                    ClassDisplayName = modelItem.ClassDisplayName,
-                    ClassName = modelItem.ClassName,
-                    Model = modelItem.HasModel ? modelItem.Model.FileName : "",
-                    Categories = categories
-                });
+                preparedModelItems.Add(new ModelItemSerializable(modelItem));
             }
-            #endregion
 
             var output = new StringBuilder();
-
             using (TextWriter textWriter = new StringWriter(output))
             {
                 using (JsonWriter jsonWriter = new JsonTextWriter(textWriter))
                 {
-                    var serializer = new JsonSerializer()
+                    JsonSerializer serializer = new JsonSerializer();
+                    if (sortAlphabetically)
                     {
-                        Formatting = Formatting.Indented
-                    };
+                        var jsonSerializerSettings = new Newtonsoft.Json.JsonSerializerSettings
+                        {
+                            ContractResolver = new OrderedContractResolver(),
+                        };
+                        serializer = Newtonsoft.Json.JsonSerializer.Create(jsonSerializerSettings);
+                    }
+
+                    if (indentedFormat)
+                    {
+                        serializer.Formatting = Formatting.Indented; 
+                    }
 
                     serializer.Serialize(jsonWriter, preparedModelItems);
                 }
@@ -265,36 +235,49 @@ namespace NavisworksDevHelper.ModelItem
 
             return output;
         }
-
-        private class ModelItemCategoriesSerialiableObject
+        
+        /// <summary>
+        /// Serialize ModelItems to JSON file and save it in the file in filePath
+        /// </summary>
+        /// <param name="modelItems"></param>
+        /// <param name="filePath">file path of the JSON file. Example: "D:\\Test\\test.json"</param>
+        public static void SerializeModelItems(Autodesk.Navisworks.Api.ModelItemCollection modelItems, string filePath, bool sortAlphabetically = false, bool indentedFormat = false)
         {
-            public string DisplayName { get; set; }
-            public string ClassDisplayName { get; set; }
-            public string ClassName { get; set; }
-            public string Model { get; set; }
+            // setting the data in the serializable classes
+            var preparedModelItems = new List<ModelItemSerializable>();
+            foreach (var modelItem in modelItems)
+            {
+                preparedModelItems.Add(new ModelItemSerializable(modelItem));
+            }
 
-            public List<Category> Categories { get; set; }
+            using (TextWriter textWriter = new StreamWriter(filePath))
+            {
+                using (JsonWriter jsonWriter = new JsonTextWriter(textWriter))
+                {
+                    JsonSerializer serializer = new JsonSerializer();
+                    if (sortAlphabetically)
+                    {
+                        var jsonSerializerSettings = new Newtonsoft.Json.JsonSerializerSettings
+                        {
+                            ContractResolver = new OrderedContractResolver(),
+                        };
+                        serializer = Newtonsoft.Json.JsonSerializer.Create(jsonSerializerSettings);
+                    }
+
+                    if (indentedFormat)
+                    {
+                        serializer.Formatting = Formatting.Indented;
+                    }
+
+                    serializer.Serialize(jsonWriter, preparedModelItems);
+                }
+            }
         }
 
-        private class Category
-        {
-            public string Name { get; set; }
-
-            public string DisplayName { get; set; }
-
-            public List<Property> Properties { get; set; }
-
-        }
-
-        private class Property
-        {
-            public string Name { get; set; }
-            public string DisplayName { get; set; }
-            public string Value { get; set; }
-            public string VauleType { get; set; }
-        }
         #endregion
 
     }
+
+
 
 }
