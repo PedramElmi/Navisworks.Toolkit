@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>C:\Program Files\Autodesk\Navisworks Manage 2022\Dependencies\</OutputPath>
+    <OutputPath>..\..\Program Files\Autodesk\Navisworks Manage 2022\Dependencies\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
