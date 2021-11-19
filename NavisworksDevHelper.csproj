@@ -35,10 +35,12 @@
     <Reference Include="Autodesk.Navisworks.Api, Version=19.0.1374.1, Culture=neutral, PublicKeyToken=d85e58fa5af9b484, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Assemblies\Navisworks Manage 2022\Autodesk.Navisworks.Api.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Assemblies\Navisworks Manage 2022\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -58,6 +60,7 @@
   <ItemGroup>
     <None Include="Assemblies\Navisworks Manage 2022\Autodesk.Navisworks.Api.dll" />
     <None Include="Assemblies\Navisworks Manage 2022\Newtonsoft.Json.dll" />
+    <None Include="README.md" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
