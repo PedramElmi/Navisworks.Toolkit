@@ -1,27 +1,22 @@
-﻿using System;
+﻿using Autodesk.Navisworks.Api;
+using NavisworksDevHelper.Enums;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using Autodesk.Navisworks.Api;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
-
-namespace NavisworksDevHelper.ModelItem
+namespace NavisworksDevHelper.ModelItemHelpers
 {
     public static partial class CategoriesPropertiesHelper
     {
-        #region Methods
+        #region Public Methods
 
         /// <summary>
         ///  gets the Value based on its type.
         /// </summary>
         /// <param name="variantData">VariantData (Value)</param>
-        /// <returns>Object that can be casted to its class (i.e. NamedConstant, double etc...) available in Autodesk.Navisworks.Api.VariantDataType</returns>
-        public static object GetCleanedVariantData(VariantData variantData)
+        /// <returns>dynamic that can be casted to its class (i.e. NamedConstant, double etc...) available in Autodesk.Navisworks.Api.VariantDataType</returns>
+        public static dynamic GetCleanedVariantData(VariantData variantData)
         {
             switch (variantData.DataType)
             {
@@ -31,15 +26,15 @@ namespace NavisworksDevHelper.ModelItem
 
                 // Unit-less double value
                 case VariantDataType.Double:
-                        return variantData.ToDouble();
+                    return variantData.ToDouble();
 
                 // Unit-less 32 bit integer value
                 case VariantDataType.Int32:
-                        return variantData.ToInt32();
+                    return variantData.ToInt32();
 
                 // Boolean (true/false) value
                 case VariantDataType.Boolean:
-                        return variantData.ToBoolean();
+                    return variantData.ToBoolean();
 
                 // String intended for display to the end user (normally localized)
                 case VariantDataType.DisplayString:
@@ -47,19 +42,19 @@ namespace NavisworksDevHelper.ModelItem
 
                 // A specific date and time (usually UTC)
                 case VariantDataType.DateTime:
-                        return variantData.ToDateTime();
+                    return variantData.ToDateTime();
 
                 // A double that represents a length (specific units depend on context)
                 case VariantDataType.DoubleLength:
-                        return variantData.ToDoubleLength();
+                    return variantData.ToDoubleLength();
 
                 // A double that represents an angle in radians
                 case VariantDataType.DoubleAngle:
-                        return variantData.ToDoubleAngle();
+                    return variantData.ToDoubleAngle();
 
                 // A named constant
                 case VariantDataType.NamedConstant:
-                        return variantData.ToNamedConstant();
+                    return variantData.ToNamedConstant();
 
                 // String intended to be used as a programmatic identifier. 7-bit ASCII characters only.
                 case VariantDataType.IdentifierString:
@@ -67,19 +62,19 @@ namespace NavisworksDevHelper.ModelItem
 
                 // A double that species an area (specific units depend on context)
                 case VariantDataType.DoubleArea:
-                        return variantData.ToDoubleArea();
+                    return variantData.ToDoubleArea();
 
                 // A double that species a volume (specific units depend on context)
                 case VariantDataType.DoubleVolume:
-                        return variantData.ToDoubleVolume();
+                    return variantData.ToDoubleVolume();
 
                 // A 3D point value
                 case VariantDataType.Point3D:
-                        return variantData.ToPoint3D();
+                    return variantData.ToPoint3D();
 
                 // A 2D point value
                 case VariantDataType.Point2D:
-                        return variantData.ToPoint2D();
+                    return variantData.ToPoint2D();
 
                 // the default
                 default:
@@ -199,10 +194,9 @@ namespace NavisworksDevHelper.ModelItem
         /// </summary>
         /// <param name="modelItems"></param>
         /// <returns>JSON as StringBuilder</returns>
-        public static StringBuilder SerializeModelItems(Autodesk.Navisworks.Api.ModelItemCollection modelItems, bool sortAlphabetically = false, bool indentedFormat = false)
+        public static StringBuilder SerializeModelItems(ModelItemCollection modelItems, bool sortAlphabetically = false, bool indentedFormat = false)
         {
-
-            // setting the data in the serializable classes
+            // setting the data in the serializable private classes
             var preparedModelItems = new List<ModelItemSerializable>();
             foreach (var modelItem in modelItems)
             {
@@ -226,7 +220,7 @@ namespace NavisworksDevHelper.ModelItem
 
                     if (indentedFormat)
                     {
-                        serializer.Formatting = Formatting.Indented; 
+                        serializer.Formatting = Formatting.Indented;
                     }
 
                     serializer.Serialize(jsonWriter, preparedModelItems);
@@ -235,15 +229,15 @@ namespace NavisworksDevHelper.ModelItem
 
             return output;
         }
-        
+
         /// <summary>
         /// Serialize ModelItems to JSON file and save it in the file in filePath
         /// </summary>
         /// <param name="modelItems"></param>
         /// <param name="filePath">file path of the JSON file. Example: "D:\\Test\\test.json"</param>
-        public static void SerializeModelItems(Autodesk.Navisworks.Api.ModelItemCollection modelItems, string filePath, bool sortAlphabetically = false, bool indentedFormat = false)
+        public static void SerializeModelItems(ModelItemCollection modelItems, string filePath, bool sortAlphabetically = false, bool indentedFormat = false)
         {
-            // setting the data in the serializable classes
+            // setting the data in the serializable private classes
             var preparedModelItems = new List<ModelItemSerializable>();
             foreach (var modelItem in modelItems)
             {
@@ -274,10 +268,6 @@ namespace NavisworksDevHelper.ModelItem
             }
         }
 
-        #endregion
-
+        #endregion Public Methods
     }
-
-
-
 }

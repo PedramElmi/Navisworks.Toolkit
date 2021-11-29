@@ -52,9 +52,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ModelItem\CategoriesPropertiesHelper.cs" />
-    <Compile Include="ModelItem\CategoriesPropertiesHelper.ModelItemSerializable.cs" />
-    <Compile Include="ModelItem\IconType.cs" />
+    <Compile Include="ModelItemHelpers\CategoriesPropertiesHelper.cs" />
+    <Compile Include="ModelItemHelpers\CategoriesPropertiesHelper.ModelItemSerializable.cs" />
+    <Compile Include="Enums\IconType.cs" />
+    <Compile Include="ModelItemHelpers\ModelItemHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
