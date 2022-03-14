@@ -23,7 +23,7 @@ namespace NavisworksDevHelper.ModelItemHelpers
 
                 try
                 {
-                    Value = GetCleanedVariantData(property.Value);
+                    Value = GetVariantData(property.Value);
                 }
                 catch (Exception)
                 {
@@ -39,7 +39,7 @@ namespace NavisworksDevHelper.ModelItemHelpers
 
             public string DisplayName { get; set; }
             public string Name { get; set; }
-            public object Value { get; set; }
+            public dynamic Value { get; set; }
             public string ValueType { get; set; }
 
             #endregion Public Properties

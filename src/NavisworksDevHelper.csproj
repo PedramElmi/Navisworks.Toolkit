@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NavisworksDevHelper</RootNamespace>
-    <AssemblyName>NavisworksDevHelper.PDEL</AssemblyName>
+    <AssemblyName>NavisworksDevHelper.PedramElmi</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -33,12 +33,18 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autodesk.Navisworks.Api">
-      <HintPath>lib\NavisworksManage2022\Autodesk.Navisworks.Api.dll</HintPath>
+      <HintPath>..\..\..\Program Files\Autodesk\Navisworks Manage 2022\Autodesk.Navisworks.Api.dll</HintPath>
+    </Reference>
+    <Reference Include="Autodesk.Navisworks.ComApi">
+      <HintPath>..\..\..\Program Files\Autodesk\Navisworks Manage 2022\Autodesk.Navisworks.ComApi.dll</HintPath>
+    </Reference>
+    <Reference Include="Autodesk.Navisworks.Interop.ComApi">
+      <HintPath>..\..\..\Program Files\Autodesk\Navisworks Manage 2022\Autodesk.Navisworks.Interop.ComApi.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -52,13 +58,15 @@
   <ItemGroup>
     <Compile Include="ModelItemHelpers\CategoriesPropertiesHelper.cs" />
     <Compile Include="ModelItemHelpers\CategoriesPropertiesHelper.ModelItemSerializable.cs" />
-    <Compile Include="Enums\IconType.cs" />
+    <Compile Include="ModelItemHelpers\IconType.cs" />
+    <Compile Include="ModelItemHelpers\DataPropertyComparer.cs" />
+    <Compile Include="NavisworksDevHelperExtentions.cs" />
     <Compile Include="ModelItemHelpers\ModelItemHelper.cs" />
+    <Compile Include="ModelItemHelpers\CustomPropertyCategory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="README.md" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
