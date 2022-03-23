@@ -1,5 +1,6 @@
 ﻿using Autodesk.Navisworks.Api;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -112,9 +113,9 @@ namespace NavisworksDevHelper.ModelItemHelpers
         {
             var iconProperty = modelItem.PropertyCategories.FindPropertyByName("LcOaNode", "LcOaNodeIcon");
 
-            var iconValue = GetCleanedString(iconProperty.Value);
+            //var iconValue = GetCleanedString(iconProperty.Value);
 
-            switch (iconValue)
+            switch (iconProperty.Value.ToNamedConstant().DisplayName)
             {
                 case "File":
                     return IconType.File;
@@ -217,7 +218,7 @@ namespace NavisworksDevHelper.ModelItemHelpers
         /// </summary>
         /// <param name="modelItems"></param>
         /// <returns>JSON as StringBuilder</returns>
-        public static StringBuilder SerializeModelItems(ModelItemCollection modelItems, bool sortAlphabetically = false, bool indentedFormat = false)
+        public static StringBuilder SerializeModelItems(ModelItemCollection modelItems, bool sortAlphabetically = false, bool indentedFormat = false, NamingStrategySerialization namingStrategy = NamingStrategySerialization.Default)
         {
             // setting the data in the serializable private classes
             var preparedModelItems = new List<ModelItemSerializable>();
@@ -231,21 +232,7 @@ namespace NavisworksDevHelper.ModelItemHelpers
             {
                 using (JsonWriter jsonWriter = new JsonTextWriter(textWriter))
                 {
-                    JsonSerializer serializer = new JsonSerializer();
-                    if (sortAlphabetically)
-                    {
-                        var jsonSerializerSettings = new Newtonsoft.Json.JsonSerializerSettings
-                        {
-                            ContractResolver = new OrderedContractResolver(),
-                        };
-                        serializer = Newtonsoft.Json.JsonSerializer.Create(jsonSerializerSettings);
-                    }
-
-                    if (indentedFormat)
-                    {
-                        serializer.Formatting = Formatting.Indented;
-                    }
-
+                    var serializer = GetJsonSerializer(sortAlphabetically, indentedFormat, namingStrategy);
                     serializer.Serialize(jsonWriter, preparedModelItems);
                 }
             }
@@ -258,7 +245,7 @@ namespace NavisworksDevHelper.ModelItemHelpers
         /// </summary>
         /// <param name="modelItems"></param>
         /// <param name="filePath">file path of the JSON file. Example: "D:\\Test\\test.json"</param>
-        public static void SerializeModelItems(ModelItemCollection modelItems, string filePath, bool sortAlphabetically = false, bool indentedFormat = false)
+        public static void SerializeModelItems(ModelItemCollection modelItems, string filePath, bool sortAlphabetically = false, bool indentedFormat = false, NamingStrategySerialization namingStrategy = NamingStrategySerialization.Default)
         {
             // setting the data in the serializable private classes
             var preparedModelItems = new List<ModelItemSerializable>();
@@ -271,26 +258,53 @@ namespace NavisworksDevHelper.ModelItemHelpers
             {
                 using (JsonWriter jsonWriter = new JsonTextWriter(textWriter))
                 {
-                    JsonSerializer serializer = new JsonSerializer();
-                    if (sortAlphabetically)
-                    {
-                        var jsonSerializerSettings = new Newtonsoft.Json.JsonSerializerSettings
-                        {
-                            ContractResolver = new OrderedContractResolver(),
-                        };
-                        serializer = Newtonsoft.Json.JsonSerializer.Create(jsonSerializerSettings);
-                    }
-
-                    if (indentedFormat)
-                    {
-                        serializer.Formatting = Formatting.Indented;
-                    }
-
+                    var serializer = GetJsonSerializer(sortAlphabetically, indentedFormat, namingStrategy);
                     serializer.Serialize(jsonWriter, preparedModelItems);
                 }
             }
         }
 
         #endregion Public Methods
+
+        #region Private Methods
+
+        private static JsonSerializer GetJsonSerializer(bool sortAlphabetically, bool indentedFormat, NamingStrategySerialization namingStrategy)
+        {
+            var contractResolver = sortAlphabetically ? new OrderedContractResolver() : new DefaultContractResolver();
+
+            switch (namingStrategy)
+            {
+                case NamingStrategySerialization.Default:
+                    contractResolver.NamingStrategy = new DefaultNamingStrategy();
+                    break;
+
+                case NamingStrategySerialization.CamelCase:
+                    contractResolver.NamingStrategy = new CamelCaseNamingStrategy();
+                    break;
+
+                case NamingStrategySerialization.KebabCase:
+                    contractResolver.NamingStrategy = new KebabCaseNamingStrategy();
+                    break;
+
+                case NamingStrategySerialization.SnakeCase:
+                    contractResolver.NamingStrategy = new SnakeCaseNamingStrategy();
+                    break;
+            }
+
+            var jsonSerializerSettings = new JsonSerializerSettings()
+            {
+                ContractResolver = contractResolver
+            };
+            var serializer = JsonSerializer.Create(jsonSerializerSettings);
+
+            if (indentedFormat)
+            {
+                serializer.Formatting = Formatting.Indented;
+            }
+
+            return serializer;
+        }
+
+        #endregion Private Methods
     }
 }

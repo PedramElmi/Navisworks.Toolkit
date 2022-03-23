@@ -76,7 +76,7 @@ namespace NavisworksDevHelper
         /// <returns></returns>
         public static IconType GetIconType(this ModelItem modelItem)
         {
-            return GetIconType(modelItem);
+            return CategoriesPropertiesHelper.GetIconType(modelItem);
         }
 
         #endregion Public Methods
