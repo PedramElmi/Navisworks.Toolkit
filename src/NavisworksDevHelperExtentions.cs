@@ -1,6 +1,7 @@
 ﻿using Autodesk.Navisworks.Api;
+using NavisworksDevHelper.ModelItemHelpers;
 
-namespace NavisworksDevHelper.ModelItemHelpers
+namespace NavisworksDevHelper
 {
     public static class NavisworksDevHelperExtentions
     {
