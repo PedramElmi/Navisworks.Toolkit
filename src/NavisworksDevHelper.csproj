@@ -62,7 +62,7 @@
     <Compile Include="ModelItemHelpers\CategoriesPropertiesHelper.ModelItemSerializable.cs" />
     <Compile Include="ModelItemHelpers\IconType.cs" />
     <Compile Include="ModelItemHelpers\DataPropertyComparer.cs" />
-    <Compile Include="ModelItemHelpers\NamingStrategySerialization.cs" />
+    <Compile Include="ModelItemHelpers\NamingStrategy.cs" />
     <Compile Include="NavisworksDevHelperExtentions.cs" />
     <Compile Include="ModelItemHelpers\CustomPropertyCategory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -218,7 +218,7 @@ namespace NavisworksDevHelper.ModelItemHelpers
         /// </summary>
         /// <param name="modelItems"></param>
         /// <returns>JSON as StringBuilder</returns>
-        public static StringBuilder SerializeModelItems(ModelItemCollection modelItems, bool sortAlphabetically = false, bool indentedFormat = false, NamingStrategySerialization namingStrategy = NamingStrategySerialization.Default)
+        public static StringBuilder SerializeModelItems(ModelItemCollection modelItems, bool sortAlphabetically, bool indentedFormat, NamingStrategy namingStrategy)
         {
             // setting the data in the serializable private classes
             var preparedModelItems = new List<ModelItemSerializable>();
@@ -245,7 +245,7 @@ namespace NavisworksDevHelper.ModelItemHelpers
         /// </summary>
         /// <param name="modelItems"></param>
         /// <param name="filePath">file path of the JSON file. Example: "D:\\Test\\test.json"</param>
-        public static void SerializeModelItems(ModelItemCollection modelItems, string filePath, bool sortAlphabetically = false, bool indentedFormat = false, NamingStrategySerialization namingStrategy = NamingStrategySerialization.Default)
+        public static void SerializeModelItems(ModelItemCollection modelItems, string filePath, bool sortAlphabetically, bool indentedFormat, NamingStrategy namingStrategy)
         {
             // setting the data in the serializable private classes
             var preparedModelItems = new List<ModelItemSerializable>();
@@ -268,25 +268,25 @@ namespace NavisworksDevHelper.ModelItemHelpers
 
         #region Private Methods
 
-        private static JsonSerializer GetJsonSerializer(bool sortAlphabetically, bool indentedFormat, NamingStrategySerialization namingStrategy)
+        private static JsonSerializer GetJsonSerializer(bool sortAlphabetically, bool indentedFormat, NamingStrategy namingStrategy)
         {
             var contractResolver = sortAlphabetically ? new OrderedContractResolver() : new DefaultContractResolver();
 
             switch (namingStrategy)
             {
-                case NamingStrategySerialization.Default:
+                case NamingStrategy.Default:
                     contractResolver.NamingStrategy = new DefaultNamingStrategy();
                     break;
 
-                case NamingStrategySerialization.CamelCase:
+                case NamingStrategy.CamelCase:
                     contractResolver.NamingStrategy = new CamelCaseNamingStrategy();
                     break;
 
-                case NamingStrategySerialization.KebabCase:
+                case NamingStrategy.KebabCase:
                     contractResolver.NamingStrategy = new KebabCaseNamingStrategy();
                     break;
 
-                case NamingStrategySerialization.SnakeCase:
+                case NamingStrategy.SnakeCase:
                     contractResolver.NamingStrategy = new SnakeCaseNamingStrategy();
                     break;
             }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NavisworksDevHelper.ModelItemHelpers
 {
-    public enum NamingStrategySerialization
+    public enum NamingStrategy
     {
         Default,
         CamelCase,

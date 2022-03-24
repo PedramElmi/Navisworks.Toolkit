@@ -1,5 +1,6 @@
 ﻿using Autodesk.Navisworks.Api;
 using NavisworksDevHelper.ModelItemHelpers;
+using System.Text;
 
 namespace NavisworksDevHelper
 {
@@ -77,6 +78,32 @@ namespace NavisworksDevHelper
         public static IconType GetIconType(this ModelItem modelItem)
         {
             return CategoriesPropertiesHelper.GetIconType(modelItem);
+        }
+
+        /// <summary>
+        /// Serialize the ModelItems PropertyCategories in a JSON format
+        /// </summary>
+        /// <param name="modelItems">ModelItems</param>
+        /// <param name="sortAlphabetically">True: Sorted, False: Unsorted</param>
+        /// <param name="indentedFormat">True: Indented, False: Unindented</param>
+        /// <param name="namingStrategy">Default, CamelCase, KebabCase, SnakeCase</param>
+        /// <returns>JSON Formated of the ModelItems</returns>
+        public static StringBuilder JsonSerialize(this ModelItemCollection modelItems, bool sortAlphabetically = false, bool indentedFormat = false, NamingStrategy namingStrategy = NamingStrategy.Default)
+        {
+            return CategoriesPropertiesHelper.SerializeModelItems(modelItems, sortAlphabetically, indentedFormat, namingStrategy);
+        }
+
+        /// <summary>
+        ///  Serialize the ModelItems PropertyCategories in a JSON format and save it in a .json text file
+        /// </summary>
+        /// <param name="modelItems">ModelItems</param>
+        /// <param name="filePath">file path to save it on a .json text file</param>
+        /// <param name="sortAlphabetically">True: Sorted, False: Unsorted</param>
+        /// <param name="indentedFormat">True: Indented, False: Unindented</param>
+        /// <param name="namingStrategy">Default, CamelCase, KebabCase, SnakeCase</param>
+        public static void JsonSerialize(this ModelItemCollection modelItems, string filePath ,bool sortAlphabetically = false, bool indentedFormat = false, NamingStrategy namingStrategy = NamingStrategy.Default)
+        {
+            CategoriesPropertiesHelper.SerializeModelItems(modelItems, filePath, sortAlphabetically, indentedFormat, namingStrategy);
         }
 
         #endregion Public Methods
