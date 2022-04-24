@@ -1,10 +1,10 @@
 ﻿using Autodesk.Navisworks.Api;
-using NavisworksDevHelper.ModelItemHelpers;
+using PedramElmi.Autodesk.Navisworks.Helper.ModelItemHelpers;
 using System.Text;
 
-namespace NavisworksDevHelper
+namespace PedramElmi.Autodesk.Navisworks.Helper
 {
-    public static class NavisworksDevHelperExtentions
+    public static class ApiExtentions
     {
         #region Public Methods
 

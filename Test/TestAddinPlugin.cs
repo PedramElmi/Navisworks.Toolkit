@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using NavisworksDevHelper;
-using NavisworksDevHelper.ModelItemHelpers;
+using PedramElmi.Autodesk.Navisworks.Helper;
+using PedramElmi.Autodesk.Navisworks.Helper.ModelItemHelpers;
 using Autodesk.Navisworks.Api;
 using System.Diagnostics;
 
-namespace Test
+namespace PedramElmi.Autodesk.Navisworks.Helper.Test
 {
-    [Plugin("NavisworksDevHelperTest", "PedramElmi", DisplayName = "Navisworks Development Helper Test")]
+    [Plugin("PedramElmi.Autodesk.Navisworks.Helper.Test", "PedramElmi", DisplayName = "Navisworks Development Helper Test")]
     [AddInPlugin(AddInLocation.AddIn)]
     public class TestAddinPlugin : AddInPlugin
     {        

@@ -50,9 +50,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\src\NavisworksDevHelper.csproj">
+    <ProjectReference Include="..\src\PedramElmi.Autodesk.Navisworks.Helper.csproj">
       <Project>{f6b3f0f1-6c96-4be1-99a7-ecf299b66f14}</Project>
-      <Name>NavisworksDevHelper</Name>
+      <Name>PedramElmi.Autodesk.Navisworks.Helper</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

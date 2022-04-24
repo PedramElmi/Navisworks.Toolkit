@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Autodesk.Navisworks.Api;
-namespace NavisworksDevHelper.ModelItemHelpers
+namespace PedramElmi.Autodesk.Navisworks.Helper.ModelItemHelpers
 {
     /// <summary>
     /// A DataProperty Comparer To use in System.Linq Methods. Checks Property.Name and Property.DisplayName Match. It does not consider the Property Value.

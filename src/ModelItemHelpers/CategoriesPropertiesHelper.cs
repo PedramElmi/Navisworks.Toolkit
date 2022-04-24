@@ -6,7 +6,7 @@ using System.Globalization;
 using System.IO;
 using System.Text;
 
-namespace NavisworksDevHelper.ModelItemHelpers
+namespace PedramElmi.Autodesk.Navisworks.Helper.ModelItemHelpers
 {
     /// <summary>
     /// Static Helper Methods for CategoryProperties
@@ -109,7 +109,7 @@ namespace NavisworksDevHelper.ModelItemHelpers
         /// </summary>
         /// <param name="modelItem"></param>
         /// <returns></returns>
-        public static IconType GetIconType(Autodesk.Navisworks.Api.ModelItem modelItem)
+        public static IconType GetIconType(ModelItem modelItem)
         {
             var iconProperty = modelItem.PropertyCategories.FindPropertyByName("LcOaNode", "LcOaNodeIcon");
 

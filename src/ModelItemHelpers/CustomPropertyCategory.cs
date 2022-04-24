@@ -3,7 +3,7 @@ using Autodesk.Navisworks.Api.ComApi;
 using Autodesk.Navisworks.Api.Interop.ComApi;
 using System.Linq;
 
-namespace NavisworksDevHelper.ModelItemHelpers
+namespace PedramElmi.Autodesk.Navisworks.Helper.ModelItemHelpers
 {
     /// <summary>
     /// A custom user-defined Category to be added to ModelItems' PropertyCategories

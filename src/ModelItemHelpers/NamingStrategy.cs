@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NavisworksDevHelper.ModelItemHelpers
+namespace PedramElmi.Autodesk.Navisworks.Helper.ModelItemHelpers
 {
     public enum NamingStrategy
     {
