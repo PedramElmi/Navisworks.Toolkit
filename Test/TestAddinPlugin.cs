@@ -20,7 +20,7 @@ namespace Test
 
             var selectedModelItems = Application.ActiveDocument.CurrentSelection.SelectedItems;
 
-            CategoriesPropertiesHelper.SerializeModelItems(selectedModelItems, "C:\\Users\\Pedram\\Desktop\\devhelperserialization.json", sortAlphabetically: true, indentedFormat: false, namingStrategy: NamingStrategySerialization.CamelCase);
+            CategoriesPropertiesHelper.SerializeModelItems(selectedModelItems, "C:\\Users\\Pedram\\Desktop\\devhelperserialization.json", sortAlphabetically: true, indentedFormat: false, namingStrategy: NamingStrategy.CamelCase);
 
             return 0;
 

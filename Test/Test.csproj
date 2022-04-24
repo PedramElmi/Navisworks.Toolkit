@@ -32,9 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autodesk.Navisworks.Api, Version=19.0.1374.1, Culture=neutral, PublicKeyToken=d85e58fa5af9b484, processorArchitecture=AMD64">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Program Files\Autodesk\Navisworks Manage 2022\Autodesk.Navisworks.Api.dll</HintPath>
+    <Reference Include="Autodesk.Navisworks.Api">
+      <HintPath>..\..\..\Program Files\Autodesk\Navisworks Manage 2023\Autodesk.Navisworks.Api.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
