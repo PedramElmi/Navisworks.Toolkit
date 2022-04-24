@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PedramElmi.Autodesk.Navisworks.Helper.ModelItemHelpers
+namespace PedramElmi.Autodesk.Navisworks.Helper.ModelItem
 {
     /// <summary>
     /// IconTypes of a ModelItem (Unidentified,File,Layer,Collection,CompositeObject,InsertGroup,Geometry)

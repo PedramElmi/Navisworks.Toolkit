@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace PedramElmi.Autodesk.Navisworks.Helper.ModelItemHelpers
+namespace PedramElmi.Autodesk.Navisworks.Helper.ModelItem
 {
     public static partial class CategoriesPropertiesHelper
     {
@@ -56,7 +56,7 @@ namespace PedramElmi.Autodesk.Navisworks.Helper.ModelItemHelpers
             /// Basic constructor to create a ModelItem from the Autodesk.Navisworks.Api.ModelItem class
             /// </summary>
             /// <param name="modelItem"></param>
-            public ModelItemSerializable(ModelItem modelItem)
+            public ModelItemSerializable(global::Autodesk.Navisworks.Api.ModelItem modelItem)
             {
                 DisplayName = modelItem.DisplayName;
                 ClassDisplayName = modelItem.ClassDisplayName;

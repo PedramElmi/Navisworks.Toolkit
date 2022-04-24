@@ -3,7 +3,7 @@ using Autodesk.Navisworks.Api.ComApi;
 using Autodesk.Navisworks.Api.Interop.ComApi;
 using System.Linq;
 
-namespace PedramElmi.Autodesk.Navisworks.Helper.ModelItemHelpers
+namespace PedramElmi.Autodesk.Navisworks.Helper.ModelItem
 {
     /// <summary>
     /// A custom user-defined Category to be added to ModelItems' PropertyCategories
@@ -81,7 +81,7 @@ namespace PedramElmi.Autodesk.Navisworks.Helper.ModelItemHelpers
 
         #region Private Methods
 
-        private void SetUserDefined(ModelItem modelItem, DataPropertyCollection properties, bool overwrite)
+        private void SetUserDefined(global::Autodesk.Navisworks.Api.ModelItem modelItem, DataPropertyCollection properties, bool overwrite)
         {
             // convert ModelItem to COM Path
             var comModelItem = ComApiBridge.ToInwOaPath(modelItem);

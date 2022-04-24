@@ -1,5 +1,5 @@
 ﻿using Autodesk.Navisworks.Api;
-using PedramElmi.Autodesk.Navisworks.Helper.ModelItemHelpers;
+using PedramElmi.Autodesk.Navisworks.Helper.ModelItem;
 using System.Text;
 
 namespace PedramElmi.Autodesk.Navisworks.Helper
@@ -14,7 +14,7 @@ namespace PedramElmi.Autodesk.Navisworks.Helper
         /// </summary>
         /// <param name="modelItem"></param>
         /// <param name="category">This category and its properties will be added to this ModelItem</param>
-        public static void AddCustomPropertyCategory(this ModelItem modelItem, CustomPropertyCategory category)
+        public static void AddCustomPropertyCategory(this global::Autodesk.Navisworks.Api.ModelItem modelItem, CustomPropertyCategory category)
         {
             var modelItems = new ModelItemCollection()
             {
@@ -75,7 +75,7 @@ namespace PedramElmi.Autodesk.Navisworks.Helper
         /// </summary>
         /// <param name="modelItem"></param>
         /// <returns></returns>
-        public static IconType GetIconType(this ModelItem modelItem)
+        public static IconType GetIconType(this global::Autodesk.Navisworks.Api.ModelItem modelItem)
         {
             return CategoriesPropertiesHelper.GetIconType(modelItem);
         }
