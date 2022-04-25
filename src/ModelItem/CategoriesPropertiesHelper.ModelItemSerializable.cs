@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace PedramElmi.Navisworks.Helper.ModelItem
+namespace PedramElmi.Navisworks.Toolkit.ModelItem
 {
     public static partial class CategoriesPropertiesHelper
     {

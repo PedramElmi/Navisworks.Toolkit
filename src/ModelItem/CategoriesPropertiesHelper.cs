@@ -6,7 +6,7 @@ using System.Globalization;
 using System.IO;
 using System.Text;
 
-namespace PedramElmi.Navisworks.Helper.ModelItem
+namespace PedramElmi.Navisworks.Toolkit.ModelItem
 {
     /// <summary>
     /// Static Helper Methods for CategoryProperties
