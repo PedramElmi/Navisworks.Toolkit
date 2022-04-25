@@ -7,7 +7,7 @@ Extension methods and actions for `Autodesk.Navisworks.Api`
 
 ## How to use
 ```csharp
-using PedramElmi.Autodesk.Navisworks.Helper;
+using PedramElmi.Navisworks.Helper;
 ```
 ## Contribute
 Feel free to contact me to collaborate on this project.

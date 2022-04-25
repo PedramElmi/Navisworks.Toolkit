@@ -1,8 +1,8 @@
 ﻿using Autodesk.Navisworks.Api;
-using PedramElmi.Autodesk.Navisworks.Helper.ModelItem;
+using PedramElmi.Navisworks.Helper.ModelItem;
 using System.Text;
 
-namespace PedramElmi.Autodesk.Navisworks.Helper
+namespace PedramElmi.Navisworks.Helper
 {
     public static class ApiExtentions
     {

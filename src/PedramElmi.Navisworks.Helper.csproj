@@ -7,8 +7,8 @@
     <ProjectGuid>{F6B3F0F1-6C96-4BE1-99A7-ECF299B66F14}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PedramElmi.Autodesk.Navisworks.Helper</RootNamespace>
-    <AssemblyName>PedramElmi.Autodesk.Navisworks.Helper</AssemblyName>
+    <RootNamespace>PedramElmi.Navisworks.Helper</RootNamespace>
+    <AssemblyName>PedramElmi.Navisworks.Helper</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
