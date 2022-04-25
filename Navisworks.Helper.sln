@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PedramElmi.Navisworks.Helper", "src\PedramElmi.Navisworks.Helper.csproj", "{F6B3F0F1-6C96-4BE1-99A7-ECF299B66F14}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Navisworks.Helper", "src\Navisworks.Helper.csproj", "{F6B3F0F1-6C96-4BE1-99A7-ECF299B66F14}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D5310AA3-E358-4794-827D-053AFF5E9E7C}"
 	ProjectSection(SolutionItems) = preProject
@@ -12,7 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{DDBF656A-1DA0-4763-8F78-20664A49A371}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Navisworks.Helper.Test", "Test\Navisworks.Helper.Test.csproj", "{DDBF656A-1DA0-4763-8F78-20664A49A371}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
