@@ -55,14 +55,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ModelItemExtensions.cs" />
     <Compile Include="ModelItem\CategoriesProperties.cs" />
     <Compile Include="ModelItem\CategoriesProperties.ModelItemSerializable.cs" />
     <Compile Include="ModelItem\IconType.cs" />
     <Compile Include="ModelItem\DataPropertyComparer.cs" />
+    <Compile Include="ModelItemCollectionExtensions.cs" />
     <Compile Include="ModelItem\NamingStrategy.cs" />
-    <Compile Include="ApiExtentions.cs" />
     <Compile Include="ModelItem\CustomPropertyCategory.cs" />
+    <Compile Include="VariantDataExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertyCategoryCollectionExtensions.cs" />
+    <Compile Include="PropertyCategoryExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json">
