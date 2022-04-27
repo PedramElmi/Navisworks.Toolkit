@@ -104,7 +104,7 @@ namespace PedramElmi.Navisworks.Toolkit.ModelItem
                 newCOMProperty.UserName = property.DisplayName;
 
                 // set property value
-                newCOMProperty.value = property.Value.Cast<object>();
+                newCOMProperty.value = property.Value.ToDynamic();
 
                 // add new COM property to COM category
                 newComCategory.Properties().Add(newCOMProperty);

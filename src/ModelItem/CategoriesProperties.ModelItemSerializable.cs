@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace PedramElmi.Navisworks.Toolkit.ModelItem
 {
-    public static partial class CategoriesPropertiesHelper
+    public static partial class CategoriesProperties
     {
         #region Private Classes
 

@@ -1,9 +1,10 @@
-﻿using Autodesk.Navisworks.Api;
+﻿using Api = Autodesk.Navisworks.Api;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace PedramElmi.Navisworks.Toolkit.ModelItem
@@ -11,7 +12,7 @@ namespace PedramElmi.Navisworks.Toolkit.ModelItem
     /// <summary>
     /// Static Helper Methods for CategoryProperties
     /// </summary>
-    public static partial class CategoriesPropertiesHelper
+    public static partial class CategoriesProperties
     {
         #region Public Methods
 
@@ -21,7 +22,7 @@ namespace PedramElmi.Navisworks.Toolkit.ModelItem
         /// </summary>
         /// <param name="variantData"></param>
         /// <returns></returns>
-        public static string GetCleanedString(VariantData variantData)
+        public static string GetCleanedString(Api.VariantData variantData)
         {
             if (variantData.IsDisposed)
             {
@@ -30,71 +31,71 @@ namespace PedramElmi.Navisworks.Toolkit.ModelItem
 
             switch (variantData.DataType)
             {
-                case VariantDataType.None:
+                case Api.VariantDataType.None:
                     return "None";
 
-                case VariantDataType.Double:
+                case Api.VariantDataType.Double:
                 {
                     double num = variantData.ToDouble();
                     CultureInfo currentCulture = CultureInfo.CurrentCulture;
                     string str5 = num.ToString(currentCulture);
                     return str5;
                 }
-                case VariantDataType.Int32:
+                case Api.VariantDataType.Int32:
                 {
                     int num2 = variantData.ToInt32();
                     CultureInfo currentCulture2 = CultureInfo.CurrentCulture;
                     string str6 = num2.ToString(currentCulture2);
                     return str6;
                 }
-                case VariantDataType.Boolean:
+                case Api.VariantDataType.Boolean:
                 {
                     bool flag = variantData.ToBoolean();
                     CultureInfo currentCulture5 = CultureInfo.CurrentCulture;
                     string str11 = flag.ToString(currentCulture5);
                     return str11;
                 }
-                case VariantDataType.DisplayString:
+                case Api.VariantDataType.DisplayString:
                 {
                     string str10 = variantData.ToDisplayString();
                     return str10;
                 }
-                case VariantDataType.DateTime:
+                case Api.VariantDataType.DateTime:
                 {
                     string str9 = variantData.ToDateTime().ToString(CultureInfo.CurrentCulture);
                     return str9;
                 }
-                case VariantDataType.DoubleLength:
+                case Api.VariantDataType.DoubleLength:
                 {
                     double num4 = variantData.ToDoubleLength();
                     CultureInfo currentCulture4 = CultureInfo.CurrentCulture;
                     string str8 = num4.ToString(currentCulture4);
                     return str8;
                 }
-                case VariantDataType.DoubleAngle:
+                case Api.VariantDataType.DoubleAngle:
                 {
                     double num3 = variantData.ToDoubleAngle();
                     CultureInfo currentCulture3 = CultureInfo.CurrentCulture;
                     string str7 = num3.ToString(currentCulture3);
                     return str7;
                 }
-                case VariantDataType.NamedConstant:
+                case Api.VariantDataType.NamedConstant:
                 {
-                    NamedConstant namedConstant = variantData.ToNamedConstant();
+                    Api.NamedConstant namedConstant = variantData.ToNamedConstant();
                     string str4 = (!(namedConstant == null)) ? namedConstant.ToString() : "<null>";
                     return str4;
                 }
-                case VariantDataType.IdentifierString:
+                case Api.VariantDataType.IdentifierString:
                 {
                     string str3 = variantData.ToIdentifierString();
                     return str3;
                 }
-                case VariantDataType.Point3D:
+                case Api.VariantDataType.Point3D:
                 {
                     string str2 = variantData.ToPoint3D().ToString();
                     return str2;
                 }
-                case VariantDataType.Point2D:
+                case Api.VariantDataType.Point2D:
                 {
                     string str = variantData.ToPoint2D().ToString();
                     return str;
@@ -147,64 +148,64 @@ namespace PedramElmi.Navisworks.Toolkit.ModelItem
         /// <returns>
         /// dynamic that can be casted to its class (i.e. NamedConstant, double etc...) available in Autodesk.Navisworks.Api.VariantDataType
         /// </returns>
-        public static dynamic GetVariantData(VariantData variantData)
+        public static dynamic GetVariantData(Api.VariantData variantData)
         {
             switch (variantData.DataType)
             {
                 // Empty. No data stored.
-                case VariantDataType.None:
+                case Api.VariantDataType.None:
                     goto default;
 
                 // Unit-less double value
-                case VariantDataType.Double:
+                case Api.VariantDataType.Double:
                     return variantData.ToDouble();
 
                 // Unit-less 32 bit integer value
-                case VariantDataType.Int32:
+                case Api.VariantDataType.Int32:
                     return variantData.ToInt32();
 
                 // Boolean (true/false) value
-                case VariantDataType.Boolean:
+                case Api.VariantDataType.Boolean:
                     return variantData.ToBoolean();
 
                 // String intended for display to the end user (normally localized)
-                case VariantDataType.DisplayString:
+                case Api.VariantDataType.DisplayString:
                     return variantData.ToDisplayString();
 
                 // A specific date and time (usually UTC)
-                case VariantDataType.DateTime:
+                case Api.VariantDataType.DateTime:
                     return variantData.ToDateTime();
 
                 // A double that represents a length (specific units depend on context)
-                case VariantDataType.DoubleLength:
+                case Api.VariantDataType.DoubleLength:
                     return variantData.ToDoubleLength();
 
                 // A double that represents an angle in radians
-                case VariantDataType.DoubleAngle:
+                case Api.VariantDataType.DoubleAngle:
                     return variantData.ToDoubleAngle();
 
                 // A named constant
-                case VariantDataType.NamedConstant:
+                case Api.VariantDataType.NamedConstant:
                     return variantData.ToNamedConstant();
 
                 // String intended to be used as a programmatic identifier. 7-bit ASCII characters only.
-                case VariantDataType.IdentifierString:
+                case Api.VariantDataType.IdentifierString:
                     return variantData.ToIdentifierString();
 
                 // A double that species an area (specific units depend on context)
-                case VariantDataType.DoubleArea:
+                case Api.VariantDataType.DoubleArea:
                     return variantData.ToDoubleArea();
 
                 // A double that species a volume (specific units depend on context)
-                case VariantDataType.DoubleVolume:
+                case Api.VariantDataType.DoubleVolume:
                     return variantData.ToDoubleVolume();
 
                 // A 3D point value
-                case VariantDataType.Point3D:
+                case Api.VariantDataType.Point3D:
                     return variantData.ToPoint3D();
 
                 // A 2D point value
-                case VariantDataType.Point2D:
+                case Api.VariantDataType.Point2D:
                     return variantData.ToPoint2D();
 
                 // the default
@@ -218,7 +219,7 @@ namespace PedramElmi.Navisworks.Toolkit.ModelItem
         /// </summary>
         /// <param name="modelItems"></param>
         /// <returns>JSON as StringBuilder</returns>
-        public static StringBuilder SerializeModelItems(ModelItemCollection modelItems, bool sortAlphabetically, bool indentedFormat, NamingStrategy namingStrategy)
+        public static StringBuilder SerializeModelItems(Api.ModelItemCollection modelItems, bool sortAlphabetically, bool indentedFormat, NamingStrategy namingStrategy)
         {
             // setting the data in the serializable private classes
             var preparedModelItems = new List<ModelItemSerializable>();
@@ -245,7 +246,7 @@ namespace PedramElmi.Navisworks.Toolkit.ModelItem
         /// </summary>
         /// <param name="modelItems"></param>
         /// <param name="filePath">file path of the JSON file. Example: "D:\\Test\\test.json"</param>
-        public static void SerializeModelItems(ModelItemCollection modelItems, string filePath, bool sortAlphabetically, bool indentedFormat, NamingStrategy namingStrategy)
+        public static void SerializeModelItems(Api.ModelItemCollection modelItems, string filePath, bool sortAlphabetically, bool indentedFormat, NamingStrategy namingStrategy)
         {
             // setting the data in the serializable private classes
             var preparedModelItems = new List<ModelItemSerializable>();
@@ -306,5 +307,66 @@ namespace PedramElmi.Navisworks.Toolkit.ModelItem
         }
 
         #endregion Private Methods
+
+
+        #region Public Methods
+
+        public static HashSet<string> GetCategoriesDisplaName(Api.PropertyCategoryCollection categories)
+        {
+            return (from category in categories
+                    select category.DisplayName).ToHashSet();
+        }
+
+        public static HashSet<string> GetIntersectedCategoriesDisplayName(Api.ModelItemCollection modelItems)
+        {
+            var categories = new HashSet<HashSet<string>>();
+            foreach (var modelItem in modelItems)
+            {
+                categories.Add(new HashSet<string>(GetCategoriesDisplaName(modelItem.PropertyCategories)));
+            }
+
+            // intersect all of ModelItem's category name
+            // more: https://stackoverflow.com/questions/1674742/intersection-of-multiple-lists-with-ienumerable-intersect
+            return categories
+                .Skip(1)
+                .Aggregate(
+                new HashSet<string>(categories.First()),
+                (h, e) => { h.IntersectWith(e); return h; });
+        }
+
+        public static HashSet<string> GetIntersectedPropertiesDisplayName(Api.ModelItemCollection modelItems, string categoryDisplayName)
+        {
+            var categories = new HashSet<Api.PropertyCategory>();
+            foreach (var item in modelItems)
+            {
+                categories.Add(item.PropertyCategories.FindCategoryByDisplayName(categoryDisplayName));
+            }
+
+            var properties = new HashSet<HashSet<string>>();
+            foreach (var category in categories)
+            {
+                properties.Add(new HashSet<string>(GetPropertiesDisplayName(category)));
+            }
+
+            return properties
+                .Skip(1)
+                .Aggregate(
+                new HashSet<string>(properties.First()),
+                (h, e) => { h.IntersectWith(e); return h; });
+        }
+
+        public static HashSet<string> GetPropertiesDisplayName(Api.PropertyCategory category)
+        {
+            return (from property in category.Properties select property.DisplayName).ToHashSet();
+        }
+
+        public static HashSet<string> GetPropertiesDisplayName(Api.ModelItem modelItem, string categoryDisplayName)
+        {
+            var category = modelItem.PropertyCategories.FindCategoryByDisplayName(categoryDisplayName);
+
+            return GetPropertiesDisplayName(category);
+        }
+
+        #endregion Public Methods
     }
 }
