@@ -11,9 +11,11 @@ namespace PedramElmi.Navisworks.Toolkit
         /// <summary>
         /// Returns the properties display name
         /// </summary>
-        /// <param name="category"></param>
-        /// <returns></returns>
-        public static HashSet<string> GetPropertiesDisplayName(this Api.PropertyCategory category)
+        /// <param name="category">
+        /// </param>
+        /// <returns>
+        /// </returns>
+        public static IEnumerable<string> GetPropertiesDisplayName(this Api.PropertyCategory category)
         {
             return CategoriesProperties.GetPropertiesDisplayName(category);
         }

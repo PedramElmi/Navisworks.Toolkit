@@ -7,6 +7,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
+using Autodesk.Navisworks.Api;
+
+using System.Security.Policy;
+
 namespace PedramElmi.Navisworks.Toolkit.ModelItem
 {
     /// <summary>
@@ -16,12 +20,20 @@ namespace PedramElmi.Navisworks.Toolkit.ModelItem
     {
         #region Public Methods
 
+        public static IEnumerable<string> GetCategoriesDisplaName(IEnumerable<PropertyCategory> categories)
+        {
+            return from category in categories
+                   select category.DisplayName;
+        }
+
         /// <summary>
         /// Returns the suitable string for displaying data of the VariantData class and Cleaned
         /// version of .ToString()
         /// </summary>
-        /// <param name="variantData"></param>
-        /// <returns></returns>
+        /// <param name="variantData">
+        /// </param>
+        /// <returns>
+        /// </returns>
         public static string GetCleanedString(Api.VariantData variantData)
         {
             if (variantData.IsDisposed)
@@ -108,8 +120,10 @@ namespace PedramElmi.Navisworks.Toolkit.ModelItem
         /// <summary>
         /// Gets the icon type that it is on visual tree.
         /// </summary>
-        /// <param name="modelItem"></param>
-        /// <returns></returns>
+        /// <param name="modelItem">
+        /// </param>
+        /// <returns>
+        /// </returns>
         public static IconType GetIconType(global::Autodesk.Navisworks.Api.ModelItem modelItem)
         {
             var iconProperty = modelItem.PropertyCategories.FindPropertyByName("LcOaNode", "LcOaNodeIcon");
@@ -141,10 +155,54 @@ namespace PedramElmi.Navisworks.Toolkit.ModelItem
             }
         }
 
+        public static HashSet<string> GetIntersectedCategoriesDisplayName(IEnumerable<Api.ModelItem> modelItems)
+        {
+            var categories = new HashSet<HashSet<string>>();
+            foreach (var modelItem in modelItems)
+            {
+                categories.Add(new HashSet<string>(GetCategoriesDisplaName(modelItem.PropertyCategories)));
+            }
+
+            // intersect all of ModelItem's category name
+            // more: https://stackoverflow.com/questions/1674742/intersection-of-multiple-lists-with-ienumerable-intersect
+            return categories
+                .Skip(1)
+                .Aggregate(
+                new HashSet<string>(categories.First()),
+                (h, e) => { h.IntersectWith(e); return h; });
+        }
+
+        public static HashSet<string> GetIntersectedPropertiesDisplayName(IEnumerable<Api.ModelItem> modelItems, string categoryDisplayName)
+        {
+            var categories = from item in modelItems select item.PropertyCategories.FindCategoryByDisplayName(categoryDisplayName);
+
+            var properties = from category in categories select category.GetPropertiesDisplayName();
+
+            return properties
+                .Skip(1)
+                .Aggregate(
+                new HashSet<string>(properties.First()),
+                (h, e) => { h.IntersectWith(e); return h; });
+        }
+
+        public static IEnumerable<string> GetPropertiesDisplayName(Api.PropertyCategory category)
+        {
+            return from property in category.Properties select property.DisplayName;
+        }
+
+        public static IEnumerable<string> GetPropertiesDisplayName(Api.ModelItem modelItem, string categoryDisplayName)
+        {
+            var category = modelItem.PropertyCategories.FindCategoryByDisplayName(categoryDisplayName);
+
+            return GetPropertiesDisplayName(category);
+        }
+
         /// <summary>
         /// Gets the dynamic value based on its type
         /// </summary>
-        /// <param name="variantData">VariantData (Value)</param>
+        /// <param name="variantData">
+        /// VariantData (Value)
+        /// </param>
         /// <returns>
         /// dynamic that can be casted to its class (i.e. NamedConstant, double etc...) available in Autodesk.Navisworks.Api.VariantDataType
         /// </returns>
@@ -217,8 +275,11 @@ namespace PedramElmi.Navisworks.Toolkit.ModelItem
         /// <summary>
         /// Serialize ModelItem Properties to JSON
         /// </summary>
-        /// <param name="modelItems"></param>
-        /// <returns>JSON as StringBuilder</returns>
+        /// <param name="modelItems">
+        /// </param>
+        /// <returns>
+        /// JSON as StringBuilder
+        /// </returns>
         public static StringBuilder SerializeModelItems(Api.ModelItemCollection modelItems, bool sortAlphabetically, bool indentedFormat, NamingStrategy namingStrategy)
         {
             // setting the data in the serializable private classes
@@ -244,8 +305,11 @@ namespace PedramElmi.Navisworks.Toolkit.ModelItem
         /// <summary>
         /// Serialize ModelItems to JSON file and save it in the file in filePath
         /// </summary>
-        /// <param name="modelItems"></param>
-        /// <param name="filePath">file path of the JSON file. Example: "D:\\Test\\test.json"</param>
+        /// <param name="modelItems">
+        /// </param>
+        /// <param name="filePath">
+        /// file path of the JSON file. Example: "D:\\Test\\test.json"
+        /// </param>
         public static void SerializeModelItems(Api.ModelItemCollection modelItems, string filePath, bool sortAlphabetically, bool indentedFormat, NamingStrategy namingStrategy)
         {
             // setting the data in the serializable private classes
@@ -307,66 +371,5 @@ namespace PedramElmi.Navisworks.Toolkit.ModelItem
         }
 
         #endregion Private Methods
-
-
-        #region Public Methods
-
-        public static HashSet<string> GetCategoriesDisplaName(Api.PropertyCategoryCollection categories)
-        {
-            return (from category in categories
-                    select category.DisplayName).ToHashSet();
-        }
-
-        public static HashSet<string> GetIntersectedCategoriesDisplayName(Api.ModelItemCollection modelItems)
-        {
-            var categories = new HashSet<HashSet<string>>();
-            foreach (var modelItem in modelItems)
-            {
-                categories.Add(new HashSet<string>(GetCategoriesDisplaName(modelItem.PropertyCategories)));
-            }
-
-            // intersect all of ModelItem's category name
-            // more: https://stackoverflow.com/questions/1674742/intersection-of-multiple-lists-with-ienumerable-intersect
-            return categories
-                .Skip(1)
-                .Aggregate(
-                new HashSet<string>(categories.First()),
-                (h, e) => { h.IntersectWith(e); return h; });
-        }
-
-        public static HashSet<string> GetIntersectedPropertiesDisplayName(Api.ModelItemCollection modelItems, string categoryDisplayName)
-        {
-            var categories = new HashSet<Api.PropertyCategory>();
-            foreach (var item in modelItems)
-            {
-                categories.Add(item.PropertyCategories.FindCategoryByDisplayName(categoryDisplayName));
-            }
-
-            var properties = new HashSet<HashSet<string>>();
-            foreach (var category in categories)
-            {
-                properties.Add(new HashSet<string>(GetPropertiesDisplayName(category)));
-            }
-
-            return properties
-                .Skip(1)
-                .Aggregate(
-                new HashSet<string>(properties.First()),
-                (h, e) => { h.IntersectWith(e); return h; });
-        }
-
-        public static HashSet<string> GetPropertiesDisplayName(Api.PropertyCategory category)
-        {
-            return (from property in category.Properties select property.DisplayName).ToHashSet();
-        }
-
-        public static HashSet<string> GetPropertiesDisplayName(Api.ModelItem modelItem, string categoryDisplayName)
-        {
-            var category = modelItem.PropertyCategories.FindCategoryByDisplayName(categoryDisplayName);
-
-            return GetPropertiesDisplayName(category);
-        }
-
-        #endregion Public Methods
     }
 }
