@@ -14,6 +14,7 @@ namespace PedramElmi.Navisworks.Toolkit
         /// overwrites the new value of properties and remains the existing properties
         /// </summary>
         /// <param name="modelItems">
+        /// Target ModelItems
         /// </param>
         /// <param name="category">
         /// This category and its properties will be added to these ModelItems
