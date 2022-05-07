@@ -7,11 +7,9 @@ namespace PedramElmi.Navisworks.Toolkit
 {
     public static class ModelItemCollectionExtensions
     {
-        #region Public Methods
-
         /// <summary>
-        /// Add a custom Category Property (User-Defined). If this category exists, it will
-        /// overwrites the new value of properties and remains the existing properties
+        /// Add a custom Category Property (User-Defined). If this category exists, it will overwrites the new value of properties
+        /// and remains the existing properties
         /// </summary>
         /// <param name="modelItems">
         /// Target ModelItems
@@ -96,6 +94,18 @@ namespace PedramElmi.Navisworks.Toolkit
             CategoriesProperties.SerializeModelItems(modelItems, filePath, sortAlphabetically, indentedFormat, namingStrategy);
         }
 
-        #endregion Public Methods
+        /// <summary>
+        /// Returns a <see cref="Api.ModelItemCollection"/>
+        /// </summary>
+        /// <param name="modelItems">
+        /// </param>
+        /// <returns>
+        /// </returns>
+        public static Api.ModelItemCollection ToModelItemCollection(this IEnumerable<Api.ModelItem> modelItems)
+        {
+            var collection = new Api.ModelItemCollection();
+            collection.AddRange(modelItems);
+            return collection;
+        }
     }
 }
