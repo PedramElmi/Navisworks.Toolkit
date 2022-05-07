@@ -55,6 +55,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DocumentSelectionSetsExtentions.cs" />
+    <Compile Include="FolderItemExtentions.cs" />
     <Compile Include="ModelItemExtensions.cs" />
     <Compile Include="ModelItem\CategoriesProperties.cs" />
     <Compile Include="ModelItem\CategoriesProperties.ModelItemSerializable.cs" />
