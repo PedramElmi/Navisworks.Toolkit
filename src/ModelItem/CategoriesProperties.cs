@@ -124,13 +124,9 @@ namespace PedramElmi.Navisworks.Toolkit.ModelItem
         /// </param>
         /// <returns>
         /// </returns>
-        public static IconType GetIconType(global::Autodesk.Navisworks.Api.ModelItem modelItem)
+        public static IconType GetIconType(Api.ModelItem modelItem)
         {
-            var iconProperty = modelItem.PropertyCategories.FindPropertyByName("LcOaNode", "LcOaNodeIcon");
-
-            //var iconValue = GetCleanedString(iconProperty.Value);
-
-            switch (iconProperty.Value.ToNamedConstant().DisplayName)
+            switch (modelItem.PropertyCategories.FindPropertyByName("LcOaNode", "LcOaNodeIcon").Value.ToNamedConstant().DisplayName)
             {
                 case "File":
                     return IconType.File;
