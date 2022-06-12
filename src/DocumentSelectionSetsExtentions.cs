@@ -15,7 +15,7 @@ namespace PedramElmi.Navisworks.Toolkit
         /// </summary>
         /// <param name="documentSelectionSets"></param>
         /// <returns></returns>
-        public static HashSet<SelectionSet> GetSelectionSets(this DocumentSelectionSets documentSelectionSets)
+        public static IEnumerable<SelectionSet> GetSelectionSets(this DocumentSelectionSets documentSelectionSets)
         {
             return documentSelectionSets.RootItem.GetSelectionSets();
         }

@@ -37,21 +37,7 @@ namespace PedramElmi.Navisworks.Toolkit
         {
             return CategoriesProperties.GetIconType(modelItem);
         }
-
-        /// <summary>
-        /// Returns the properties display name
-        /// </summary>
-        /// <param name="modelItem">
-        /// </param>
-        /// <param name="categoryDisplayName">
-        /// </param>
-        /// <returns>
-        /// </returns>
-        public static IEnumerable<string> GetPropertiesDisplayName(this Api.ModelItem modelItem, string categoryDisplayName)
-        {
-            return CategoriesProperties.GetPropertiesDisplayName(modelItem, categoryDisplayName);
-        }
-
+        
         #endregion Public Methods
     }
 }

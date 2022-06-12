@@ -29,7 +29,7 @@ namespace PedramElmi.Navisworks.Toolkit
         /// </param>
         /// <returns>
         /// </returns>
-        public static HashSet<string> GetIntersectedCategoriesDisplayName(this IEnumerable<Api.ModelItem> modelItems)
+        public static IEnumerable<string> GetIntersectedCategoriesDisplayName(this IEnumerable<Api.ModelItem> modelItems)
         {
             return CategoriesProperties.GetIntersectedCategoriesDisplayName(modelItems);
         }
@@ -43,7 +43,7 @@ namespace PedramElmi.Navisworks.Toolkit
         /// </param>
         /// <returns>
         /// </returns>
-        public static HashSet<string> GetIntersectedPropertiesDisplayName(this IEnumerable<Api.ModelItem> modelItems, string categoryDisplayName)
+        public static IEnumerable<string> GetIntersectedPropertiesDisplayName(this IEnumerable<Api.ModelItem> modelItems, string categoryDisplayName)
         {
             return CategoriesProperties.GetIntersectedPropertiesDisplayName(modelItems, categoryDisplayName);
         }

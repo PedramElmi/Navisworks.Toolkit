@@ -1,15 +1,14 @@
-﻿using Api = Autodesk.Navisworks.Api;
+﻿using Autodesk.Navisworks.Api;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using PedramElmi.Navisworks.Toolkit.Helper;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
 
-using Autodesk.Navisworks.Api;
-
-using System.Security.Policy;
+using Api = Autodesk.Navisworks.Api;
 
 namespace PedramElmi.Navisworks.Toolkit.ModelItem
 {
@@ -22,13 +21,12 @@ namespace PedramElmi.Navisworks.Toolkit.ModelItem
 
         public static IEnumerable<string> GetCategoriesDisplaName(IEnumerable<PropertyCategory> categories)
         {
-            return from category in categories
-                   select category.DisplayName;
+            return (from category in categories
+                    select category.DisplayName).Distinct();
         }
 
         /// <summary>
-        /// Returns the suitable string for displaying data of the VariantData class and Cleaned
-        /// version of .ToString()
+        /// Returns the suitable string for displaying data of the VariantData class and Cleaned version of .ToString()
         /// </summary>
         /// <param name="variantData">
         /// </param>
@@ -36,12 +34,12 @@ namespace PedramElmi.Navisworks.Toolkit.ModelItem
         /// </returns>
         public static string GetCleanedString(Api.VariantData variantData)
         {
-            if (variantData.IsDisposed)
+            if(variantData.IsDisposed)
             {
                 return "Disposed";
             }
 
-            switch (variantData.DataType)
+            switch(variantData.DataType)
             {
                 case Api.VariantDataType.None:
                     return "None";
@@ -126,7 +124,7 @@ namespace PedramElmi.Navisworks.Toolkit.ModelItem
         /// </returns>
         public static IconType GetIconType(Api.ModelItem modelItem)
         {
-            switch (modelItem.PropertyCategories.FindPropertyByName("LcOaNode", "LcOaNodeIcon").Value.ToNamedConstant().DisplayName)
+            switch(modelItem.PropertyCategories.FindPropertyByName("LcOaNode", "LcOaNodeIcon").Value.ToNamedConstant().DisplayName)
             {
                 case "File":
                     return IconType.File;
@@ -151,34 +149,25 @@ namespace PedramElmi.Navisworks.Toolkit.ModelItem
             }
         }
 
-        public static HashSet<string> GetIntersectedCategoriesDisplayName(IEnumerable<Api.ModelItem> modelItems)
+        public static IEnumerable<string> GetIntersectedCategoriesDisplayName(IEnumerable<Api.ModelItem> modelItems)
         {
-            var categories = new HashSet<HashSet<string>>();
-            foreach (var modelItem in modelItems)
-            {
-                categories.Add(new HashSet<string>(GetCategoriesDisplaName(modelItem.PropertyCategories)));
-            }
-
-            // intersect all of ModelItem's category name
-            // more: https://stackoverflow.com/questions/1674742/intersection-of-multiple-lists-with-ienumerable-intersect
-            return categories
-                .Skip(1)
-                .Aggregate(
-                new HashSet<string>(categories.First()),
-                (h, e) => { h.IntersectWith(e); return h; });
+            return (from modelItem in modelItems
+                    let categories = GetCategoriesDisplaName(modelItem.PropertyCategories)
+                    select categories)
+                    .IntersectAll();
         }
 
-        public static HashSet<string> GetIntersectedPropertiesDisplayName(IEnumerable<Api.ModelItem> modelItems, string categoryDisplayName)
+        public static IEnumerable<string> GetIntersectedPropertiesDisplayName(IEnumerable<Api.ModelItem> modelItems, string categoryDisplayName)
         {
-            var categories = from item in modelItems select item.PropertyCategories.FindCategoryByDisplayName(categoryDisplayName);
+            var categories =
+                from item in modelItems
+                let category = item.PropertyCategories.FindCategoryByDisplayName(categoryDisplayName)
+                where category != null
+                select category;
 
             var properties = from category in categories select category.GetPropertiesDisplayName();
 
-            return properties
-                .Skip(1)
-                .Aggregate(
-                new HashSet<string>(properties.First()),
-                (h, e) => { h.IntersectWith(e); return h; });
+            return properties.IntersectAll();
         }
 
         public static IEnumerable<string> GetPropertiesDisplayName(Api.PropertyCategory category)
@@ -204,7 +193,7 @@ namespace PedramElmi.Navisworks.Toolkit.ModelItem
         /// </returns>
         public static dynamic GetVariantData(Api.VariantData variantData)
         {
-            switch (variantData.DataType)
+            switch(variantData.DataType)
             {
                 // Empty. No data stored.
                 case Api.VariantDataType.None:
@@ -280,15 +269,15 @@ namespace PedramElmi.Navisworks.Toolkit.ModelItem
         {
             // setting the data in the serializable private classes
             var preparedModelItems = new List<ModelItemSerializable>();
-            foreach (var modelItem in modelItems)
+            foreach(var modelItem in modelItems)
             {
                 preparedModelItems.Add(new ModelItemSerializable(modelItem));
             }
 
             var output = new StringBuilder();
-            using (TextWriter textWriter = new StringWriter(output))
+            using(TextWriter textWriter = new StringWriter(output))
             {
-                using (JsonWriter jsonWriter = new JsonTextWriter(textWriter))
+                using(JsonWriter jsonWriter = new JsonTextWriter(textWriter))
                 {
                     var serializer = GetJsonSerializer(sortAlphabetically, indentedFormat, namingStrategy);
                     serializer.Serialize(jsonWriter, preparedModelItems);
@@ -310,14 +299,14 @@ namespace PedramElmi.Navisworks.Toolkit.ModelItem
         {
             // setting the data in the serializable private classes
             var preparedModelItems = new List<ModelItemSerializable>();
-            foreach (var modelItem in modelItems)
+            foreach(var modelItem in modelItems)
             {
                 preparedModelItems.Add(new ModelItemSerializable(modelItem));
             }
 
-            using (TextWriter textWriter = new StreamWriter(filePath))
+            using(TextWriter textWriter = new StreamWriter(filePath))
             {
-                using (JsonWriter jsonWriter = new JsonTextWriter(textWriter))
+                using(JsonWriter jsonWriter = new JsonTextWriter(textWriter))
                 {
                     var serializer = GetJsonSerializer(sortAlphabetically, indentedFormat, namingStrategy);
                     serializer.Serialize(jsonWriter, preparedModelItems);
@@ -333,7 +322,7 @@ namespace PedramElmi.Navisworks.Toolkit.ModelItem
         {
             var contractResolver = sortAlphabetically ? new OrderedContractResolver() : new DefaultContractResolver();
 
-            switch (namingStrategy)
+            switch(namingStrategy)
             {
                 case NamingStrategy.Default:
                     contractResolver.NamingStrategy = new DefaultNamingStrategy();
@@ -358,7 +347,7 @@ namespace PedramElmi.Navisworks.Toolkit.ModelItem
             };
             var serializer = JsonSerializer.Create(jsonSerializerSettings);
 
-            if (indentedFormat)
+            if(indentedFormat)
             {
                 serializer.Formatting = Formatting.Indented;
             }

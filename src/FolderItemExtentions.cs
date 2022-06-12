@@ -1,4 +1,5 @@
 ﻿using Autodesk.Navisworks.Api;
+using PedramElmi.Navisworks.Toolkit.Helper;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,19 +12,15 @@ namespace PedramElmi.Navisworks.Toolkit
         /// </summary>
         /// <param name="folderItem"></param>
         /// <returns></returns>
-        public static HashSet<SelectionSet> GetSelectionSets(this FolderItem folderItem)
+        public static IEnumerable<SelectionSet> GetSelectionSets(this FolderItem folderItem)
         {
             // get this item children's selection set
-            var thisSelectionSets = folderItem.Children.Where(child => child is SelectionSet).Select(child => child as SelectionSet);
+            var thisSelectionSets = folderItem.Children.OfType<SelectionSet>();
 
-            var selectionSets = folderItem.Children.Where(child => child is FolderItem).Select(child => child as FolderItem).Select(child => child.GetSelectionSets()).Append(thisSelectionSets);
-
+            var otherSelectionSets = folderItem.Children.OfType<FolderItem>().Select(child => child.GetSelectionSets());
+            
             // intersect
-            return selectionSets
-                .Skip(1)
-                .Aggregate(
-                new HashSet<SelectionSet>(selectionSets.First()),
-                (h, e) => { h.IntersectWith(e); return h; });
+            return otherSelectionSets.Append(thisSelectionSets).IntersectAll();
         }
     }
 }
