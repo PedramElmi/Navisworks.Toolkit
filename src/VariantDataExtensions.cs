@@ -44,7 +44,7 @@ namespace PedramElmi.Navisworks.Toolkit
                     }
                     catch (Exception)
                     {
-                        throw;
+                        return double.NaN;
                     }
                 }
             }
