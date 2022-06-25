@@ -81,7 +81,7 @@ namespace PedramElmi.Navisworks.Toolkit.ModelItem
 
         #region Private Methods
 
-        private void SetUserDefined(global::Autodesk.Navisworks.Api.ModelItem modelItem, DataPropertyCollection properties, bool overwrite)
+        private void SetUserDefined(Autodesk.Navisworks.Api.ModelItem modelItem, DataPropertyCollection properties, bool overwrite)
         {
             // convert ModelItem to COM Path
             var comModelItem = ComApiBridge.ToInwOaPath(modelItem);
