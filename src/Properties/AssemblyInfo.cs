@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Navisworks Development Toolkit")]
-[assembly: AssemblyDescription("A Toolkit with Helper Methods when you're working with Autodesk Navisworks API")]
+[assembly: AssemblyTitle("Navisworks Extension Toolkit")]
+[assembly: AssemblyDescription("A Toolkit with Extension Methods and helpful features when developers works with Autodesk Navisworks API")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Pedram Elmi")]
-[assembly: AssemblyProduct("Navisworks Development Toolkit")]
-[assembly: AssemblyCopyright("")]
+[assembly: AssemblyProduct("Navisworks Extension Toolkit")]
+[assembly: AssemblyCopyright("MIT License")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.0.0")]
-[assembly: AssemblyFileVersion("0.0.0")]
+[assembly: AssemblyVersion("1.0.0")]
+[assembly: AssemblyFileVersion("1.0.0")]
