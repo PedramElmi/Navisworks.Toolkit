@@ -1,5 +1,4 @@
-﻿using Autodesk.Navisworks.Api;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using PedramElmi.Navisworks.Toolkit.Helper;
 using System.Collections.Generic;
@@ -19,7 +18,7 @@ namespace PedramElmi.Navisworks.Toolkit.ModelItem
     {
         #region Public Methods
 
-        public static IEnumerable<string> GetCategoriesDisplaName(IEnumerable<PropertyCategory> categories)
+        public static IEnumerable<string> GetCategoriesDisplaName(IEnumerable<Api.PropertyCategory> categories)
         {
             return (from category in categories
                     select category.DisplayName).Distinct();
