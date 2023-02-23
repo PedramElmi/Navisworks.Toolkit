@@ -65,6 +65,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Text.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -73,26 +74,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataPropertyExtensions.cs" />
-    <Compile Include="DocumentSelectionSetsExtentions.cs" />
-    <Compile Include="FolderItemExtentions.cs" />
+    <Compile Include="ModelItem\Extensions\DataPropertyExtensions.cs" />
+    <Compile Include="SelectionSet\DocumentSelectionSetsExtentions.cs" />
+    <Compile Include="SelectionSet\FolderItemExtentions.cs" />
     <Compile Include="Helper\Extensions.cs" />
-    <Compile Include="ModelItemExtensions.cs" />
-    <Compile Include="ModelItem\CategoriesProperties.cs" />
-    <Compile Include="ModelItem\CategoriesProperties.ModelItemSerializable.cs" />
+    <Compile Include="ModelItem\Extensions\ModelItemExtensions.cs" />
     <Compile Include="ModelItem\IconType.cs" />
     <Compile Include="ModelItem\DataPropertyComparer.cs" />
-    <Compile Include="ModelItemCollectionExtensions.cs" />
-    <Compile Include="ModelItem\NamingStrategy.cs" />
+    <Compile Include="NamingStrategy.cs" />
     <Compile Include="ModelItem\CustomPropertyCategory.cs" />
-    <Compile Include="VariantDataExtensions.cs" />
+    <Compile Include="ModelItem\Extensions\VariantDataExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PropertyCategoryExtensions.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json">
-      <Version>13.0.2</Version>
-    </PackageReference>
+    <Compile Include="ModelItem\Extensions\PropertyCategoryExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
