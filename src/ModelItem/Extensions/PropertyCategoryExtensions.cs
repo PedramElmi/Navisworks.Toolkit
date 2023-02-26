@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Autodesk.Navisworks.Api;
+using PedramElmi.Navisworks.Toolkit.Helper;
 
 namespace PedramElmi.Navisworks.Toolkit
 {
@@ -31,12 +32,12 @@ namespace PedramElmi.Navisworks.Toolkit
             return from property in category.Properties select property.DisplayName;
         }
 
-        public static IDictionary<string, IDictionary<string, object>> ToDictionary(this IEnumerable<PropertyCategory> categories)
+        public static IDictionary<string, object> ToDictionary(this IEnumerable<PropertyCategory> categories)
         {
-            var dictionary = new Dictionary<string, IDictionary<string, object>>();
+            var dictionary = new Dictionary<string, object>();
             foreach (var category in categories)
             {
-                dictionary.Add(category.DisplayName, category.Properties.ToDictionary());
+                dictionary.Insert(category.DisplayName, category.Properties.ToDictionary());
             }
             return dictionary;
         }

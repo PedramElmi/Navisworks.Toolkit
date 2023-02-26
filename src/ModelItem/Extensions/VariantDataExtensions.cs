@@ -1,5 +1,4 @@
-﻿using PedramElmi.Navisworks.Toolkit.ModelItem;
-using System;
+﻿using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using Api = Autodesk.Navisworks.Api;
@@ -180,7 +179,7 @@ namespace PedramElmi.Navisworks.Toolkit
 
                 // A named constant
                 case Api.VariantDataType.NamedConstant:
-                    return variantData.ToNamedConstant();
+                    return variantData.ToNamedConstant().DisplayName;
 
                 // String intended to be used as a programmatic identifier. 7-bit ASCII characters only.
                 case Api.VariantDataType.IdentifierString:

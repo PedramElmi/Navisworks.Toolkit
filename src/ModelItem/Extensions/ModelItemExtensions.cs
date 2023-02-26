@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text.Json;
+using Newtonsoft.Json;
 
 using Api = Autodesk.Navisworks.Api;
 
@@ -123,9 +123,10 @@ namespace PedramElmi.Navisworks.Toolkit
         {
             var data = modelItem.PropertyCategories.ToDictionary();
 
-            using(var stream = File.Create(filePath))
+            using(var writer = new StreamWriter(filePath))
             {
-                JsonSerializer.Serialize(stream, data);
+                var serializer = new JsonSerializer();
+                serializer.Serialize(writer, data);
             }
         }
 
@@ -133,9 +134,10 @@ namespace PedramElmi.Navisworks.Toolkit
         {
             var data = modelItems.Select(item => item.PropertyCategories.ToDictionary());
 
-            using(var stream = File.Create(filePath))
+            using(var writer = new StreamWriter(filePath))
             {
-                JsonSerializer.Serialize(stream, data);
+                var serializer = new JsonSerializer();
+                serializer.Serialize(writer, data);
             }
         }
 
@@ -143,9 +145,10 @@ namespace PedramElmi.Navisworks.Toolkit
         {
             var data = modelItem.ToDictionaryHierarchy();
 
-            using(var stream = File.Create(filePath))
+            using(var writer = new StreamWriter(filePath))
             {
-                JsonSerializer.Serialize(stream, data);
+                var serializer = new JsonSerializer();
+                serializer.Serialize(writer, data);
             }
         }
 
@@ -153,13 +156,14 @@ namespace PedramElmi.Navisworks.Toolkit
         {
             var data = modelItems.ToDictionaryHierarchy();
 
-            using(var stream = File.Create(filePath))
+            using(var writer = new StreamWriter(filePath))
             {
-                JsonSerializer.Serialize(stream, data);
+                var serializer = new JsonSerializer();
+                serializer.Serialize(writer, data);
             }
         }
 
-        public static IEnumerable<IDictionary<string, IDictionary<string, object>>> ToDictionary(this IEnumerable<ModelItem> modelItems)
+        public static IEnumerable<IDictionary<string, object>> ToDictionary(this IEnumerable<ModelItem> modelItems)
         {
             return modelItems.Select(item => item.PropertyCategories.ToDictionary());
         }

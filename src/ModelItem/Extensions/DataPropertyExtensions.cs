@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PedramElmi.Navisworks.Toolkit.Helper;
 
 namespace PedramElmi.Navisworks.Toolkit
 {
@@ -22,7 +23,7 @@ namespace PedramElmi.Navisworks.Toolkit
             var dictionary = new Dictionary<string, object>();
             foreach(var property in properties)
             {
-                dictionary.Add(property.DisplayName, property.Value.GetValue());
+                dictionary.Insert(property.DisplayName, property.Value.GetValue());
             }
             return dictionary;
         }
