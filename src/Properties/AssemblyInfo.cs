@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Navisworks Extension Toolkit")]
-[assembly: AssemblyDescription("A Toolkit with Extension Methods and helpful features when developers works with Autodesk Navisworks API")]
+[assembly: AssemblyTitle("Navisworks Toolkit")]
+[assembly: AssemblyDescription("Open-source assembly library for Autodesk Navisworks 2023, providing additional functionalities for Navisworks API developers. It includes extension methods for the Navisworks API objects that allow developers to serialize ModelItem Property Categories data into Json format and manage new custom categories and properties with the API.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Pedram Elmi")]
-[assembly: AssemblyProduct("Navisworks Extension Toolkit")]
+[assembly: AssemblyProduct("Navisworks Toolkit")]
 [assembly: AssemblyCopyright("MIT License")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
