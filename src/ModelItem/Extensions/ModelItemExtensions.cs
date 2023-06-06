@@ -9,6 +9,7 @@ using System.Linq;
 using Newtonsoft.Json;
 
 using Api = Autodesk.Navisworks.Api;
+using System.Windows.Media.Imaging;
 
 namespace PedramElmi.Navisworks.Toolkit
 {
@@ -44,6 +45,21 @@ namespace PedramElmi.Navisworks.Toolkit
                     return IconType.Geometry;
                 default:
                     return IconType.Unidentified;
+            }
+        }
+
+
+        public static BitmapImage GetIcon(this Api.ModelItem modelItem)
+        {
+            var iconType = GetIconType(modelItem);
+            var success = IconImage.Icons.TryGetValue(iconType,out BitmapImage icon);
+            if (success)
+            {
+                return icon;
+            }
+            else
+            {
+                return null;
             }
         }
 
