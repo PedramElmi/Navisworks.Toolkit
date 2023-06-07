@@ -1,23 +1,35 @@
 ﻿using Autodesk.Navisworks.Api;
-using System;
+using PedramElmi.Navisworks.Toolkit.Helper;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PedramElmi.Navisworks.Toolkit.Helper;
 
 namespace PedramElmi.Navisworks.Toolkit
 {
     public static class DataPropertyExtensions
     {
-        #region DataProperty
+        /// <summary>
+        /// Returns an IEnumerable of display names for the given DataProperty collection.
+        /// </summary>
+        /// <param name="properties">
+        /// The collection of DataProperties to retrieve display names from.
+        /// </param>
+        /// <returns>
+        /// An IEnumerable of display names.
+        /// </returns>
+        public static IEnumerable<string> GetPropertiesDisplayName(this IEnumerable<DataProperty> properties)
+        {
+            return from property in properties select property.DisplayName;
+        }
 
-
-
-        #endregion
-
-        #region IEnumerable<DataProperty>
-
+        /// <summary>
+        /// Converts a collection of DataProperties to a Dictionary with display names as keys and property values as values.
+        /// </summary>
+        /// <param name="properties">
+        /// The collection of DataProperties to convert to a Dictionary.
+        /// </param>
+        /// <returns>
+        /// A Dictionary with display names as keys and property values as values.
+        /// </returns>
         public static IDictionary<string, object> ToDictionary(this IEnumerable<DataProperty> properties)
         {
             var dictionary = new Dictionary<string, object>();
@@ -27,12 +39,5 @@ namespace PedramElmi.Navisworks.Toolkit
             }
             return dictionary;
         }
-
-        public static IEnumerable<string> GetPropertiesDisplayName(this IEnumerable<DataProperty> properties)
-        {
-            return from property in properties select property.DisplayName;
-        }
-
-        #endregion
     }
 }
