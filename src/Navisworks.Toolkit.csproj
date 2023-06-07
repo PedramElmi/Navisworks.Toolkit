@@ -83,7 +83,6 @@
     <Compile Include="ModelItem\Extensions\ModelItemExtensions.cs" />
     <Compile Include="ModelItem\IconType.cs" />
     <Compile Include="ModelItem\DataPropertyComparer.cs" />
-    <Compile Include="NamingStrategy.cs" />
     <Compile Include="ModelItem\CustomPropertyCategory.cs" />
     <Compile Include="ModelItem\Extensions\VariantDataExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
