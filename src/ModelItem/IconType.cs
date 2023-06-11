@@ -1,13 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PedramElmi.Navisworks.Toolkit
+﻿namespace PedramElmi.Navisworks.Toolkit
 {
     /// <summary>
-    /// IconTypes of a ModelItem (Unidentified,File,Layer,Collection,CompositeObject,InsertGroup,Geometry)
+    /// IconTypes of a <see cref="Autodesk.Navisworks.Api.ModelItem"/>
+    /// <list type="bullet">
+    /// <item>Unidentified</item>
+    /// <item>File</item>
+    /// <item>Layer</item>
+    /// <item>Collection</item>
+    /// <item>CompositeObject</item>
+    /// <item>InsertGroup</item>
+    /// <item>Geometry</item>
+    /// </list>
     /// </summary>
     public enum IconType
     {

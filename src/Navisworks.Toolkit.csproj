@@ -63,6 +63,7 @@
       <EmbedInteropTypes>False</EmbedInteropTypes>
       <Private>False</Private>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -71,8 +72,10 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helper\IconImage.cs" />
     <Compile Include="ModelItem\Extensions\DataPropertyExtensions.cs" />
     <Compile Include="SelectionSet\DocumentSelectionSetsExtentions.cs" />
     <Compile Include="SelectionSet\FolderItemExtentions.cs" />
@@ -80,7 +83,6 @@
     <Compile Include="ModelItem\Extensions\ModelItemExtensions.cs" />
     <Compile Include="ModelItem\IconType.cs" />
     <Compile Include="ModelItem\DataPropertyComparer.cs" />
-    <Compile Include="NamingStrategy.cs" />
     <Compile Include="ModelItem\CustomPropertyCategory.cs" />
     <Compile Include="ModelItem\Extensions\VariantDataExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -95,6 +97,18 @@
     <None Include="PedramElmi.Navisworks.Toolkit.dll.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\Icons\GUID-197CB0CC-4CBB-4308-A42C-0B7046B05392.png" />
+    <EmbeddedResource Include="Images\Icons\GUID-2D8532F2-122E-4218-9E22-44C4BC834F7C.png" />
+    <EmbeddedResource Include="Images\Icons\GUID-3BC23219-691D-4C01-A03C-0B0D0208FE9E.png" />
+    <EmbeddedResource Include="Images\Icons\GUID-45488727-EFBB-42D4-BDF8-3C49E3C314AF.png" />
+    <EmbeddedResource Include="Images\Icons\GUID-4BCD09CF-FF0C-4B88-B473-B1025A17C100.png" />
+    <EmbeddedResource Include="Images\Icons\GUID-7AD510FA-7C48-415E-9579-D996820D8BC1.png" />
+    <EmbeddedResource Include="Images\Icons\GUID-8C08B821-22E1-45BA-9421-D9C5E577D4B0.png" />
+    <EmbeddedResource Include="Images\Icons\GUID-A12DD8E6-A4BE-401A-BB86-6C80E4C4C1FB.png" />
+    <EmbeddedResource Include="Images\Icons\GUID-D66522E4-D61B-45E1-A44B-424663BAE11C.png" />
+    <EmbeddedResource Include="Images\Icons\GUID-F178FAC1-ACD0-457B-8831-42ADBD7465FE.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

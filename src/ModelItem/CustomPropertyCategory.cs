@@ -1,40 +1,41 @@
 ﻿using Autodesk.Navisworks.Api;
-using Autodesk.Navisworks.Api.ComApi;
-using Autodesk.Navisworks.Api.Interop.ComApi;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace PedramElmi.Navisworks.Toolkit
 {
     /// <summary>
-    /// A custom user-defined PropertyCategory to be added to <see cref="Autodesk.Navisworks.Api.ModelItem"/> <seealso cref="PropertyCategory"/>
+    /// Represents a custom user-defined PropertyCategory that can be added to a ModelItem.
     /// </summary>
     public class CustomPropertyCategory
     {
-
         /// <summary>
-        /// Combined name of category
+        /// Initializes a new instance of the CustomPropertyCategory class with the specified display name.
         /// </summary>
-        public NamedConstant CombinedName { get => new NamedConstant(Name, DisplayName); }
-
-        /// <summary>
-        /// Display name of category (localized)
-        /// </summary>
-        public string DisplayName { get; set; }
-
-        /// <summary>
-        /// Name of category (suitable for programmatic use) and apparently, it cannot be edited in Navisworks 2022.1
-        /// </summary>
-        public string Name { get => "LcOaPropOverrideCat"; }
-
-        /// <summary>
-        /// The properties in this category
-        /// </summary>
-        public DataPropertyCollection Properties { get; set; } = new DataPropertyCollection();
-
+        /// <param name="displayName">
+        /// The display name of the category.
+        /// </param>
         public CustomPropertyCategory(string displayName)
         {
             DisplayName = displayName;
         }
+
+        /// <summary>
+        /// Gets the combined name of the category.
+        /// </summary>
+        public NamedConstant CombinedName { get => new NamedConstant(Name, DisplayName); }
+
+        /// <summary>
+        /// Gets or sets the display name of the category.
+        /// </summary>
+        public string DisplayName { get; set; }
+
+        /// <summary>
+        /// Gets the name of the category that is suitable for programmatic use. This name cannot be edited in Navisworks.
+        /// </summary>
+        public string Name { get => "LcOaPropOverrideCat"; }
+
+        /// <summary>
+        /// Gets or sets the collection of properties in the category.
+        /// </summary>
+        public DataPropertyCollection Properties { get; set; } = new DataPropertyCollection();
     }
 }
