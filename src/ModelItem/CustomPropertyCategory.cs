@@ -1,6 +1,6 @@
 ﻿using Autodesk.Navisworks.Api;
 
-namespace PedramElmi.Navisworks.Toolkit
+namespace Community.Navisworks.Toolkit
 {
     /// <summary>
     /// Represents a custom user-defined PropertyCategory that can be added to a ModelItem.

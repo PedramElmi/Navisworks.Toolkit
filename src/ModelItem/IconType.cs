@@ -1,4 +1,4 @@
-﻿namespace PedramElmi.Navisworks.Toolkit
+﻿namespace Community.Navisworks.Toolkit
 {
     /// <summary>
     /// IconTypes of a <see cref="Autodesk.Navisworks.Api.ModelItem"/>

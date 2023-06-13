@@ -1,7 +1,7 @@
 ﻿using Autodesk.Navisworks.Api;
 using System.Collections.Generic;
 
-namespace PedramElmi.Navisworks.Toolkit
+namespace Community.Navisworks.Toolkit
 {
     /// <summary>
     /// A DataProperty Comparer which checks both <see cref="DataProperty.Name"/> and <see cref="DataProperty.DisplayName"/> match

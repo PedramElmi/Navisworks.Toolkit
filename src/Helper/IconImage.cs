@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Windows.Media.Imaging;
 
-namespace PedramElmi.Navisworks.Toolkit.Helper
+namespace Community.Navisworks.Toolkit.Helper
 {
     public static class IconImage
     {
@@ -55,22 +55,22 @@ namespace PedramElmi.Navisworks.Toolkit.Helper
                     case IconType.Unidentified:
                         goto default;
                     case IconType.File:
-                        image = GetEmbeddedImage("PedramElmi.Navisworks.Toolkit.Images.Icons.GUID-2D8532F2-122E-4218-9E22-44C4BC834F7C.png");
+                        image = GetEmbeddedImage("Community.Navisworks.Toolkit.Images.Icons.GUID-2D8532F2-122E-4218-9E22-44C4BC834F7C.png");
                         break;
                     case IconType.Layer:
-                        image = GetEmbeddedImage("PedramElmi.Navisworks.Toolkit.Images.Icons.GUID-4BCD09CF-FF0C-4B88-B473-B1025A17C100.png");
+                        image = GetEmbeddedImage("Community.Navisworks.Toolkit.Images.Icons.GUID-4BCD09CF-FF0C-4B88-B473-B1025A17C100.png");
                         break;
                     case IconType.Collection:
-                        image = GetEmbeddedImage("PedramElmi.Navisworks.Toolkit.Images.Icons.GUID-7AD510FA-7C48-415E-9579-D996820D8BC1.png");
+                        image = GetEmbeddedImage("Community.Navisworks.Toolkit.Images.Icons.GUID-7AD510FA-7C48-415E-9579-D996820D8BC1.png");
                         break;
                     case IconType.CompositeObject:
-                        image = GetEmbeddedImage("PedramElmi.Navisworks.Toolkit.Images.Icons.GUID-197CB0CC-4CBB-4308-A42C-0B7046B05392.png");
+                        image = GetEmbeddedImage("Community.Navisworks.Toolkit.Images.Icons.GUID-197CB0CC-4CBB-4308-A42C-0B7046B05392.png");
                         break;
                     case IconType.InsertGroup:
-                        image = GetEmbeddedImage("PedramElmi.Navisworks.Toolkit.Images.Icons.GUID-A12DD8E6-A4BE-401A-BB86-6C80E4C4C1FB.png");
+                        image = GetEmbeddedImage("Community.Navisworks.Toolkit.Images.Icons.GUID-A12DD8E6-A4BE-401A-BB86-6C80E4C4C1FB.png");
                         break;
                     case IconType.Geometry:
-                        image = GetEmbeddedImage("PedramElmi.Navisworks.Toolkit.Images.Icons.GUID-8C08B821-22E1-45BA-9421-D9C5E577D4B0.png");
+                        image = GetEmbeddedImage("Community.Navisworks.Toolkit.Images.Icons.GUID-8C08B821-22E1-45BA-9421-D9C5E577D4B0.png");
                         break;
                     default:
                         break;

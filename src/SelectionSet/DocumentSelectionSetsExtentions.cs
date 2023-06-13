@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PedramElmi.Navisworks.Toolkit
+namespace Community.Navisworks.Toolkit
 {
     public static class DocumentSelectionSetsExtentions
     {
