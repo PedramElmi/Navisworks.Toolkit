@@ -1,9 +1,9 @@
 ﻿using Autodesk.Navisworks.Api;
-using PedramElmi.Navisworks.Toolkit.Helper;
+using Community.Navisworks.Toolkit.Helper;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace PedramElmi.Navisworks.Toolkit
+namespace Community.Navisworks.Toolkit
 {
     public static class FolderItemExtentions
     {

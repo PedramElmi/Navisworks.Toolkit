@@ -2,7 +2,7 @@
 using Autodesk.Navisworks.Api.ComApi;
 using Autodesk.Navisworks.Api.Interop.ComApi;
 using Newtonsoft.Json;
-using PedramElmi.Navisworks.Toolkit.Helper;
+using Community.Navisworks.Toolkit.Helper;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,7 +11,7 @@ using System.Windows.Media.Imaging;
 
 using Api = Autodesk.Navisworks.Api;
 
-namespace PedramElmi.Navisworks.Toolkit
+namespace Community.Navisworks.Toolkit
 {
     public static class ModelItemExtensions
     {
@@ -165,6 +165,7 @@ namespace PedramElmi.Navisworks.Toolkit
         {
             // Convert the ModelItem's PropertyCategories to a dictionary
             var data = modelItem.PropertyCategories.ToDictionary();
+
             // Write the dictionary to the specified file path using a StreamWriter
             using(var writer = new StreamWriter(filePath))
             {

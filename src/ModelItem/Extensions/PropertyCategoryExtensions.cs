@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Autodesk.Navisworks.Api;
-using PedramElmi.Navisworks.Toolkit.Helper;
+using Community.Navisworks.Toolkit.Helper;
 
-namespace PedramElmi.Navisworks.Toolkit
+namespace Community.Navisworks.Toolkit
 {
     public static class PropertyCategoryExtensions
     {

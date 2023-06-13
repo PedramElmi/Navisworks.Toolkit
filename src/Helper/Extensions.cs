@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace PedramElmi.Navisworks.Toolkit.Helper
+namespace Community.Navisworks.Toolkit.Helper
 {
     public static class Extensions
     {
