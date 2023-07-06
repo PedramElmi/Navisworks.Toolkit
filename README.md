@@ -1,6 +1,6 @@
 ﻿# Navisworks.Toolkit
 
-Navisworks.Toolkit is an open-source assembly library for Autodesk Navisworks 2023. It provides additional functionalities for Navisworks API developers who want to create plugins, extend the capabilities of the software, and work more efficiently.
+Navisworks.Toolkit is an open-source assembly library for Autodesk Navisworks. It provides additional functionalities for Navisworks API developers who want to create plugins, extend the capabilities of the software, and work more efficiently.
 
 This library includes extension methods for the Navisworks API objects that allow developers to:
 
@@ -31,7 +31,7 @@ The project supports configuration of the Navisworks installation path to locate
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <NavisworksInstallationPath>C:\YourInstallationPath\Navisworks Manage 2023</NavisworksInstallationPath>
+    <NavisworksInstallationPath>C:\YourInstallationPath\Navisworks Manage 2024</NavisworksInstallationPath>
   </PropertyGroup>
 </Project>
 ```

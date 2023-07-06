@@ -35,7 +35,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <NavisworksInstallationPath Condition=" '$(NavisworksInstallationPath)' == '' ">$(ProgramFiles)\Autodesk\Navisworks Manage 2023</NavisworksInstallationPath>  
+    <NavisworksInstallationPath Condition=" '$(NavisworksInstallationPath)' == '' ">$(ProgramFiles)\Autodesk\Navisworks Manage 2024</NavisworksInstallationPath>  
   </PropertyGroup>
   
   <ItemGroup>
