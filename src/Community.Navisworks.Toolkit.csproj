@@ -15,29 +15,27 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>bin\x64\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
     <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
-    <DocumentationFile>bin\Debug\Community.Navisworks.Toolkit.xml</DocumentationFile>
+    <DocumentationFile>bin\x64\Debug\Community.Navisworks.Toolkit.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>bin\x64\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x64</PlatformTarget>
     <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
-    <DocumentationFile>bin\Release\Community.Navisworks.Toolkit.xml</DocumentationFile>
+    <DocumentationFile>bin\x64\Release\Community.Navisworks.Toolkit.xml</DocumentationFile>
   </PropertyGroup>
-
   <PropertyGroup>
-    <NavisworksInstallationPath Condition=" '$(NavisworksInstallationPath)' == '' ">$(ProgramFiles)\Autodesk\Navisworks Manage 2024</NavisworksInstallationPath>  
+    <NavisworksInstallationPath Condition=" '$(NavisworksInstallationPath)' == '' ">$(ProgramFiles)\Autodesk\Navisworks Manage 2024</NavisworksInstallationPath>
   </PropertyGroup>
-  
   <ItemGroup>
     <Reference Include="Autodesk.Navisworks.Api">
       <HintPath>$(NavisworksInstallationPath)\Autodesk.Navisworks.Api.dll</HintPath>
