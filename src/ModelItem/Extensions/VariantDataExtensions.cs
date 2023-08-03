@@ -79,7 +79,7 @@ namespace Community.Navisworks.Toolkit
                 {
                     try
                     {
-                        const string pattern = @"\b(-?)(0|([1-9][0-9]*))(\.[0-9]+)?\b";
+                        const string pattern = @"[-+]?[0-9]*\.?[0-9]+";
                         Match match = Regex.Match(data.ToString(), pattern);
                         if(match.Success)
                         {
