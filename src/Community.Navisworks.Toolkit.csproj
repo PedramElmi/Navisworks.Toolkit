@@ -1,6 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <Choose>
+    <When Condition="Exists('$(MSBuildProjectFullPath).user')">
+      <PropertyGroup>
+        <NavisworksVersion>$(NavisworksVersion)</NavisworksVersion>
+        <NavisworksInstallationPath>$(NavisworksInstallationPath)</NavisworksInstallationPath>
+      </PropertyGroup>
+    </When>
+    <Otherwise>
+      <PropertyGroup>
+        <NavisworksVersion>2026</NavisworksVersion>
+        <NavisworksInstallationPath>$(ProgramFiles)\Autodesk\Navisworks Manage $(NavisworksVersion)</NavisworksInstallationPath>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -34,7 +48,7 @@
     <DocumentationFile>bin\x64\Release\Community.Navisworks.Toolkit.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
-    <NavisworksInstallationPath Condition=" '$(NavisworksInstallationPath)' == '' ">$(ProgramFiles)\Autodesk\Navisworks Manage 2024</NavisworksInstallationPath>
+    <NavisworksInstallationPath Condition=" '$(NavisworksInstallationPath)' == '' ">$(ProgramFiles)\Autodesk\Navisworks Manage 2026</NavisworksInstallationPath>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autodesk.Navisworks.Api">
@@ -77,7 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json">
-      <Version>13.0.2</Version>
+      <Version>13.0.4</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -32,12 +33,48 @@ namespace Community.Navisworks.Toolkit.Helper
 
         internal static IEnumerable<T> IntersectAll<T>(this IEnumerable<IEnumerable<T>> listsOfLists)
         {
-            return listsOfLists
-                .Skip(1)
-                .Aggregate(
-                listsOfLists.First(),
-                (h, e) => { h.Intersect(e); return h; }
-                );
+            if(listsOfLists == null)
+                throw new ArgumentNullException(nameof(listsOfLists));
+
+            using(var en = listsOfLists.GetEnumerator())
+            {
+                if(!en.MoveNext())
+                    return Enumerable.Empty<T>(); // no lists -> empty intersection
+
+                // start with the first list (guard against null)
+                IEnumerable<T> acc = en.Current ?? Enumerable.Empty<T>();
+
+                while(en.MoveNext())
+                {
+                    var next = en.Current ?? Enumerable.Empty<T>();
+                    acc = acc.Intersect(next);
+                }
+
+                return acc;
+            }
         }
+
+        internal static IEnumerable<T> UnionAll<T>(this IEnumerable<IEnumerable<T>> listsOfLists)
+        {
+            if(listsOfLists == null)
+                throw new ArgumentNullException(nameof(listsOfLists));
+
+            using(var en = listsOfLists.GetEnumerator())
+            {
+                if(!en.MoveNext())
+                    return Enumerable.Empty<T>(); // no lists
+
+                IEnumerable<T> acc = en.Current ?? Enumerable.Empty<T>();
+
+                while(en.MoveNext())
+                {
+                    var next = en.Current ?? Enumerable.Empty<T>();
+                    acc = acc.Union(next); // lazy union
+                }
+
+                return acc;
+            }
+        }
+
     }
 }

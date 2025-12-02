@@ -8,7 +8,7 @@ namespace Community.Navisworks.Toolkit
     public static class FolderItemExtentions
     {
         /// <summary>
-        /// Returns the SelectionSets s inside of the <see cref="FolderItem"/> object
+        /// Returns the SelectionSets inside of the <see cref="FolderItem"/> object
         /// </summary>
         /// <param name="folderItem"></param>
         /// <returns></returns>
@@ -19,8 +19,8 @@ namespace Community.Navisworks.Toolkit
 
             var otherSelectionSets = folderItem.Children.OfType<FolderItem>().Select(child => child.GetSelectionSets());
             
-            // intersect
-            return otherSelectionSets.Append(thisSelectionSets).IntersectAll();
+            // Union all the selection sets
+            return otherSelectionSets.Append(thisSelectionSets).UnionAll();
         }
     }
 }
