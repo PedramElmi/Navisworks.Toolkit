@@ -10,7 +10,7 @@
     </When>
     <Otherwise>
       <PropertyGroup>
-        <NavisworksVersion>2026</NavisworksVersion>
+        <NavisworksVersion>2027</NavisworksVersion>
         <NavisworksInstallationPath>$(ProgramFiles)\Autodesk\Navisworks Manage $(NavisworksVersion)</NavisworksInstallationPath>
       </PropertyGroup>
     </Otherwise>
@@ -48,7 +48,7 @@
     <DocumentationFile>bin\x64\Release\Community.Navisworks.Toolkit.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
-    <NavisworksInstallationPath Condition=" '$(NavisworksInstallationPath)' == '' ">$(ProgramFiles)\Autodesk\Navisworks Manage 2026</NavisworksInstallationPath>
+    <NavisworksInstallationPath Condition=" '$(NavisworksInstallationPath)' == '' ">$(ProgramFiles)\Autodesk\Navisworks Manage 2027</NavisworksInstallationPath>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autodesk.Navisworks.Api">

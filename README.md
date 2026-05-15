@@ -1,48 +1,189 @@
-﻿# Navisworks.Toolkit
+﻿# Community.Navisworks.Toolkit
 
-Navisworks.Toolkit is an open-source assembly library for Autodesk Navisworks. It provides additional functionalities for Navisworks API developers who want to create plugins, extend the capabilities of the software, and work more efficiently.
+Community.Navisworks.Toolkit is a .NET Framework class library for Autodesk Navisworks plugin development. It adds focused extension methods around common API tasks such as exporting model properties, traversing item hierarchies, working with user-defined property categories, resolving model item icons, and flattening selection sets.
 
-This library includes extension methods for the Navisworks API objects that allow developers to:
+The assembly namespace is `Community.Navisworks.Toolkit`. The library is intended to be referenced from Navisworks add-ins and other in-process tooling.
 
-*   Serialize ModelItem Property Categories data into a JSON format for easier data transfer and manipulation.
-*   Manage new custom categories and properties with the API, enabling more complex and customized workflows within Navisworks.
+## Features
 
-Navisworks.Toolkit is an MIT-licensed project available on GitHub. It is designed with good software design principles in mind, such as modularity, extensibility, and maintainability, making it easy to use, flexible, and adaptable to future changes.
+- Export `ModelItem` properties to dictionaries or JSON files.
+- Export full `ModelItem` hierarchies, including child nodes.
+- Convert `PropertyCategory`, `DataProperty`, and `VariantData` objects into CLR-friendly values.
+- Update, upsert, and remove user-defined property categories through the Navisworks COM bridge.
+- Find property categories and property names shared across multiple selected items.
+- Recursively collect `SelectionSet` objects from `DocumentSelectionSets` and nested folders.
+- Retrieve embedded icons for common Navisworks model item types.
 
+## API overview
 
-## Getting Started
----
+The current public surface is organized around these types:
 
-To get started with Navisworks.Toolkit, simply download the latest release from the [releases page](https://github.com/pedramelmi/Navisworks.Toolkit/releases) or clone the repository to your local machine.
+- `ModelItemExtensions`
+  Serialization, hierarchy export, common-property analysis, icon lookup, and custom property mutation.
+- `PropertyCategoryExtensions`
+  Category and property name extraction plus dictionary conversion.
+- `DataPropertyExtensions`
+  Dictionary conversion for property collections.
+- `VariantDataExtensions`
+  Conversion helpers for `VariantData` values, including numeric parsing.
+- `DocumentSelectionSetsExtentions` and `FolderItemExtentions`
+  Recursive retrieval of `SelectionSet` instances.
+- `CustomPropertyCategory`
+  A simple wrapper for user-defined property category payloads.
+- `IconType` and `IconImage`
+  Classification and embedded bitmap lookup for supported item icons.
 
-The project includes detailed documentation and examples demonstrating how to use the various extension methods and functionalities provided by the library. Additionally, the source code is well-documented and follows industry-standard conventions, making it easy to understand and modify as needed.
+## Requirements
 
-## Contributing
----
+- Autodesk Navisworks Manage installed locally.
+- .NET Framework 4.8.
+- `x64` build target.
+- Access to these Navisworks assemblies:
+  - `Autodesk.Navisworks.Api`
+  - `Autodesk.Navisworks.ComApi`
+  - `Autodesk.Navisworks.Interop.ComApi`
 
-Contributions to Navisworks.Toolkit are welcome and encouraged. If you find a bug or want to suggest a new feature, please open an issue on the GitHub repository. If you want to contribute code, please fork the repository and submit a pull request with your changes.
+The project currently defaults to this installation path when no override is provided:
 
-### `NavisworksInstallationPath` Property
+```text
+C:\Program Files\Autodesk\Navisworks Manage 2027
+```
 
-The project supports configuration of the Navisworks installation path to locate the required API references, such as Autodesk.Navisworks.Api.dll file. By default, it uses the path `"$(ProgramFiles)\Autodesk\Navisworks Manage 2023"`. Alternatively, you can set the Navisworks installation path in the user project option file.
+## Build configuration
 
-`Community.Navisworks.Toolkit.csproj.user` sample
+If your Navisworks version or installation directory is different, create or update `src/Community.Navisworks.Toolkit.csproj.user` so MSBuild can resolve the Autodesk references.
+
+Example:
+
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <NavisworksInstallationPath>C:\YourInstallationPath\Navisworks Manage 2024</NavisworksInstallationPath>
+    <NavisworksVersion>2027</NavisworksVersion>
+    <NavisworksInstallationPath>C:\Program Files\Autodesk\Navisworks Manage $(NavisworksVersion)</NavisworksInstallationPath>
   </PropertyGroup>
 </Project>
 ```
 
+The project also depends on `Newtonsoft.Json` for serialization.
+
+## Getting started
+
+Reference the compiled assembly from your Navisworks plugin project and import the toolkit namespace:
+
+```csharp
+using Community.Navisworks.Toolkit;
+```
+
+## Usage examples
+
+### Export model item properties to JSON
+
+```csharp
+using Autodesk.Navisworks.Api;
+
+ModelItem item = Autodesk.Navisworks.Api.Application.ActiveDocument.CurrentSelection.SelectedItems.First;
+item.Serialize(@"C:\temp\item-properties.json");
+```
+
+This serializes the model item's property categories and properties through `Newtonsoft.Json`.
+
+### Export a model hierarchy
+
+```csharp
+using Autodesk.Navisworks.Api;
+
+ModelItem root = Autodesk.Navisworks.Api.Application.ActiveDocument.Models.RootItem;
+root.SerializeHierarchy(@"C:\temp\model-tree.json");
+```
+
+Hierarchy exports include a `Children` entry for nested items.
+
+### Work with in-memory dictionaries
+
+```csharp
+using System.Collections.Generic;
+
+IDictionary<string, object> properties = item.PropertyCategories.ToDictionary();
+```
+
+### Find shared categories and properties
+
+```csharp
+using Autodesk.Navisworks.Api;
+using System.Collections.Generic;
+
+IEnumerable<ModelItem> items = Autodesk.Navisworks.Api.Application.ActiveDocument
+    .CurrentSelection
+    .SelectedItems;
+
+IEnumerable<string> sharedCategories = items.GetIntersectedCategoriesDisplayName();
+IEnumerable<string> sharedProperties = items.GetIntersectedPropertiesDisplayName("Item");
+```
+
+### Add or merge a custom property category
+
+```csharp
+using Autodesk.Navisworks.Api;
+
+var category = new CustomPropertyCategory("QA")
+{
+    Properties = new DataPropertyCollection
+    {
+        new DataProperty("Status", "Status", new VariantData("Approved")),
+        new DataProperty("CheckedBy", "Checked By", new VariantData("Coordinator"))
+    }
+};
+
+item.Upsert(category);
+```
+
+Available mutation methods:
+
+- `Update` overwrites the target user-defined category.
+- `Upsert` merges the provided properties with an existing category.
+- `Remove` deletes the user-defined category from the model item.
+
+### Flatten document selection sets
+
+```csharp
+using Autodesk.Navisworks.Api;
+
+IEnumerable<SelectionSet> selectionSets = Autodesk.Navisworks.Api.Application
+    .ActiveDocument
+    .SelectionSets
+    .GetSelectionSets();
+```
+
+### Resolve a model item icon
+
+```csharp
+using System.Windows.Media.Imaging;
+
+IconType iconType = item.GetIconType();
+BitmapImage icon = item.GetIcon();
+```
+
+The current code maps these icon types:
+
+- `File`
+- `Layer`
+- `Collection`
+- `CompositeObject`
+- `InsertGroup`
+- `Geometry`
+- `Unidentified`
+
+## Notes on custom property support
+
+Custom property category writes are implemented through `ComApiBridge`, which is the key mechanism this library uses to extend `ModelItem` instances with user-defined properties.
+
+`CustomPropertyCategory` always uses the internal category name `LcOaPropOverrideCat`, while the visible category label is controlled by `DisplayName`.
+
+## Contributing
+
+Issues and pull requests are welcome. The current project scope is intentionally focused on reusable helper methods for Navisworks API development rather than a full plugin framework.
 
 ## License
----
 
-Navisworks.Toolkit is released under the MIT license. Please see the [LICENSE](https://github.com/pedramelmi/Navisworks.Toolkit/blob/main/LICENSE) file for more details.
-
-## Acknowledgments
----
-
-Navisworks.Toolkit is built upon the Navisworks API and is inspired by the work of other open-source projects in the Navisworks development community. We thank the Autodesk team for their continued development and support of Navisworks, as well as the many developers who have contributed to the Navisworks development community over the years.
+This project is licensed under the [MIT License](LICENSE).
