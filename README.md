@@ -77,10 +77,18 @@ using Community.Navisworks.Toolkit;
 
 ## Usage examples
 
+Unless noted otherwise, examples that call toolkit extension methods should import both namespaces:
+
+```csharp
+using Autodesk.Navisworks.Api;
+using Community.Navisworks.Toolkit;
+```
+
 ### Export model item properties to JSON
 
 ```csharp
 using Autodesk.Navisworks.Api;
+using Community.Navisworks.Toolkit;
 
 ModelItem item = Autodesk.Navisworks.Api.Application.ActiveDocument.CurrentSelection.SelectedItems.First;
 item.Serialize(@"C:\temp\item-properties.json");
@@ -92,6 +100,7 @@ This serializes the model item's property categories and properties through `New
 
 ```csharp
 using Autodesk.Navisworks.Api;
+using Community.Navisworks.Toolkit;
 
 ModelItem root = Autodesk.Navisworks.Api.Application.ActiveDocument.Models.RootItem;
 root.SerializeHierarchy(@"C:\temp\model-tree.json");
@@ -102,8 +111,11 @@ Hierarchy exports include a `Children` entry for nested items.
 ### Work with in-memory dictionaries
 
 ```csharp
+using Autodesk.Navisworks.Api;
+using Community.Navisworks.Toolkit;
 using System.Collections.Generic;
 
+ModelItem item = Autodesk.Navisworks.Api.Application.ActiveDocument.CurrentSelection.SelectedItems.First;
 IDictionary<string, object> properties = item.PropertyCategories.ToDictionary();
 ```
 
@@ -111,6 +123,7 @@ IDictionary<string, object> properties = item.PropertyCategories.ToDictionary();
 
 ```csharp
 using Autodesk.Navisworks.Api;
+using Community.Navisworks.Toolkit;
 using System.Collections.Generic;
 
 IEnumerable<ModelItem> items = Autodesk.Navisworks.Api.Application.ActiveDocument
@@ -125,6 +138,9 @@ IEnumerable<string> sharedProperties = items.GetIntersectedPropertiesDisplayName
 
 ```csharp
 using Autodesk.Navisworks.Api;
+using Community.Navisworks.Toolkit;
+
+ModelItem item = Autodesk.Navisworks.Api.Application.ActiveDocument.CurrentSelection.SelectedItems.First;
 
 var category = new CustomPropertyCategory("QA")
 {
@@ -148,6 +164,7 @@ Available mutation methods:
 
 ```csharp
 using Autodesk.Navisworks.Api;
+using Community.Navisworks.Toolkit;
 
 IEnumerable<SelectionSet> selectionSets = Autodesk.Navisworks.Api.Application
     .ActiveDocument
@@ -158,8 +175,11 @@ IEnumerable<SelectionSet> selectionSets = Autodesk.Navisworks.Api.Application
 ### Resolve a model item icon
 
 ```csharp
+using Autodesk.Navisworks.Api;
+using Community.Navisworks.Toolkit;
 using System.Windows.Media.Imaging;
 
+ModelItem item = Autodesk.Navisworks.Api.Application.ActiveDocument.CurrentSelection.SelectedItems.First;
 IconType iconType = item.GetIconType();
 BitmapImage icon = item.GetIcon();
 ```
